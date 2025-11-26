@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <vehicle id="bus_0" depart="0.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_1" depart="30.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_2" depart="60.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_3" depart="90.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_4" depart="120.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_5" depart="150.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_6" depart="180.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_7" depart="210.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_8" depart="240.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_9" depart="270.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_10" depart="300.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_11" depart="330.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_12" depart="360.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_13" depart="390.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_14" depart="420.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_15" depart="450.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_16" depart="480.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_17" depart="510.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_18" depart="540.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_19" depart="570.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_20" depart="600.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_21" depart="630.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_22" depart="660.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_23" depart="690.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_24" depart="720.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_25" depart="750.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_26" depart="780.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_27" depart="810.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_28" depart="840.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_29" depart="870.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_30" depart="900.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_31" depart="930.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_32" depart="960.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_33" depart="990.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_34" depart="1020.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_35" depart="1050.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_36" depart="1080.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_37" depart="1110.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_38" depart="1140.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_39" depart="1170.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_40" depart="1200.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_41" depart="1230.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_42" depart="1260.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_43" depart="1290.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_44" depart="1320.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_45" depart="1350.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_46" depart="1380.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_47" depart="1410.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_48" depart="1440.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_49" depart="1470.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_50" depart="1500.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_51" depart="1530.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_52" depart="1560.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_53" depart="1590.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_54" depart="1620.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_55" depart="1650.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_56" depart="1680.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_57" depart="1710.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_58" depart="1740.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_59" depart="1770.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_60" depart="1800.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_61" depart="1830.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_62" depart="1860.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_63" depart="1890.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_64" depart="1920.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_65" depart="1950.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_66" depart="1980.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_67" depart="2010.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_68" depart="2040.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_69" depart="2070.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_70" depart="2100.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_71" depart="2130.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_72" depart="2160.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_73" depart="2190.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_74" depart="2220.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_75" depart="2250.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_76" depart="2280.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_77" depart="2310.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_78" depart="2340.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_79" depart="2370.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_80" depart="2400.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_81" depart="2430.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_82" depart="2460.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_83" depart="2490.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_84" depart="2520.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_85" depart="2550.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_86" depart="2580.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_87" depart="2610.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_88" depart="2640.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_89" depart="2670.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_90" depart="2700.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_91" depart="2730.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_92" depart="2760.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_93" depart="2790.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_94" depart="2820.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_95" depart="2850.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_96" depart="2880.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_97" depart="2910.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_98" depart="2940.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_99" depart="2970.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_100" depart="3000.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_101" depart="3030.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_102" depart="3060.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_103" depart="3090.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_104" depart="3120.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_105" depart="3150.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_106" depart="3180.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_107" depart="3210.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_108" depart="3240.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_109" depart="3270.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_110" depart="3300.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_111" depart="3330.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_112" depart="3360.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_113" depart="3390.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+    <vehicle id="bus_114" depart="3420.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P3_Bus_Downstream_TL4_P4_Upstream_Bus TL4_P3_Downstream_Bus -37190757#1"/>
+    </vehicle>
+    <vehicle id="bus_115" depart="3450.00" type="bus">
+        <route edges="37190757#0 TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_116" depart="3480.00" type="bus">
+        <route edges="302113468 TL0_P1_Upstream TL0_Downstream TL1_P1_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_117" depart="3510.00" type="bus">
+        <route edges="TL5_P2_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TurziiDeal -302113468"/>
+    </vehicle>
+    <vehicle id="bus_118" depart="3540.00" type="bus">
+        <route edges="-E24 TL9_P2P3_Upstream E18 TL1_P2_Upstream TL2_P1_Upstream TL3_P1_Upstream TL3_P1P2_DownstreamC_TL4_P1_Upstream TL4_P1P2_Downstream_TL5_P1_Upstream TL5_P0_Bus_Downstream"/>
+    </vehicle>
+    <vehicle id="bus_119" depart="3570.00" type="bus">
+        <route edges="TL5_P3_Bus_Upstream TL5_P1P2_Downstream_TL6_P1_Upstream 7936314#0 411911880 TL7_P2_Upstream TL7_P1P2_Downstream_TL8_P1_Upstream 693785226 TL0_P2_Upstream_TL8_P1P2_Downstream TL0_Downstream AfterTurziiToGrigo TL9_P1_Upstream TL9_P1_Downstream_2 E26"/>
+    </vehicle>
+
+</routes>
