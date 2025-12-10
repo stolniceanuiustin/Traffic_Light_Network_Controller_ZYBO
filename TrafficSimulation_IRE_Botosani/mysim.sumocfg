@@ -1,0 +1,18 @@
+<configuration>
+    <input>
+        <net-file value="IntersectieIRE.net.xml"/>
+        
+        <route-files value="car_routes.rou.xml"/>
+        
+        <additional-files value="vtypes.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+    </time>
+    
+    <processing>
+        <ignore-route-errors value="true"/>
+    </processing>
+</configuration>

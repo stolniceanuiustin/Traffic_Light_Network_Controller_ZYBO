@@ -13,3 +13,5 @@ status = platform.build()
 
 client.delete_component(name="Software")
 
+vitis.dispose()
+

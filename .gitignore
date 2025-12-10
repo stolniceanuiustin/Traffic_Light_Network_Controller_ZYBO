@@ -44,3 +44,6 @@ ignoreThis.txt
 Thumbs.db
 /build/
 /dist/
+
+.rigel_lopper/*
+_ide/*

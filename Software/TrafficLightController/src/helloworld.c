@@ -99,24 +99,9 @@ int main() {
       rx_data = XGpio_DiscreteRead(&GpioRxData, 1);
 
       // Optional: Print to debug console
-      xil_printf("Recv: 0x%02x\r\n", rx_data);
-
-
-
-    //   // C. Write the data to the TX Data GPIO
-    //   XGpio_DiscreteWrite(&GpioTxData, 1, rx_data);
-
-    //   // D. Pulse the TX Start Signal (Low -> High -> Low)
-    //   XGpio_DiscreteWrite(&GpioTxStart, 1, 1);
-
-    //   // Small software delay to ensure pulse width is detected by FPGA logic
-    //   for (volatile int i = 0; i < 500; i++)
-    //     ;
-
-    //   XGpio_DiscreteWrite(&GpioTxStart, 1, 0);
+      xil_printf("Recieved: 0x%02x\r\n", rx_data);
     }
 
-    // 3. Update previous state for the next loop iteration
     prev_rx_flag = rx_ready_raw;
 
     if (counter >= 10000000) { 

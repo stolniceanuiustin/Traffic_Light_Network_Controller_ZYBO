@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a93b3cce-2784-4288-b94d-28b51fbc19a6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/design_1_wrapper.xsa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/clock/xlnx-versal-clk.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/clock/xlnx-versal-net-clk.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/clock/xlnx-zynqmp-clk.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/gpio/gpio.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/input/input.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/input/linux-event-codes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/interrupt-controller/arm-gic.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/interrupt-controller/irq.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/net/mscc-phy-vsc8531.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/net/ti-dp83867.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/phy/phy.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/pinctrl/pinctrl-zynqmp.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/power/xlnx-versal-net-power.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/power/xlnx-versal-power.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/power/xlnx-versal-regnode.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/power/xlnx-zynqmp-power.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/reset/xlnx-versal-net-resets.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/reset/xlnx-versal-resets.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/include/dt-bindings/reset/xlnx-zynqmp-resets.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/pcw.dtsi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/pl.dtsi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init.tcl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init_gpl.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/ps7_init_gpl.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/skeleton.dtsi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/system-top.dts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.rigel_lopper_temp_platform/design_1_wrapper/hw/sdt/zynq-7000.dtsi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HardwareZYBO/HardwareZYBO.cache/wt/project.wpc" beforeDir="false" afterPath="$PROJECT_DIR$/../HardwareZYBO/HardwareZYBO.cache/wt/project.wpc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Software/TrafficLightController/src/.cache/clangd/index/helloworld.c.524F40DA3D50B5FF.idx" beforeDir="false" afterPath="$PROJECT_DIR$/../Software/TrafficLightController/src/.cache/clangd/index/helloworld.c.524F40DA3D50B5FF.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Software/TrafficLightController/src/helloworld.c" beforeDir="false" afterPath="$PROJECT_DIR$/../Software/TrafficLightController/src/helloworld.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Software/_ide/workspace_journal.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numerotare_Intersecti.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numerotare_Intersectii.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SUMOTools.lnk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bus_routes.rou.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bus_trips.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/car" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/car_routes.rou.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/car_trips.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/control_intersection.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysim.sumocfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/network.net.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.rou.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sumo-gui_332feX196B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vtypes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_ide/workspace_journal.py" beforeDir="false" afterPath="$PROJECT_DIR$/../_ide/workspace_journal.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="36c6aKmpWtcLE2k8ZBJxhbT3qK1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.control_intersection.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-PY-252.26199.168" />
+        <option value="bundled-python-sdk-b3d66beaba9a-c6efb3732140-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26199.168" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a93b3cce-2784-4288-b94d-28b51fbc19a6" name="Changes" comment="" />
+      <created>1765293576546</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765293576546</updated>
+      <workItem from="1765293579213" duration="3183000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Trafic_Simulation$control_intersection.coverage" NAME="control_intersection Coverage Results" MODIFIED="1765294383439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
