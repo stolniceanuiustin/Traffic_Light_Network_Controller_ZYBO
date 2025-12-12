@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "IntersectionGraph.h"
 #include "IntersectionWest.h"
+#include "IntersectionEast.h"
 #include "TrafficController.h"
 // we will recieve an array that will look like this:
 // 0xFF(traffic_val_lane1)(traffic_val_lane2)(traffic_val_lane3)...0xFF
@@ -17,6 +18,8 @@ const int MAX_MESSAGE_SIZE = 64;
 uint8_t traffic_string[MAX_MESSAGE_SIZE];
 int traffic_string_idx = 0;
 
+int message_count = 0;
+
 enum MessageState
 {
     IDLE,
@@ -27,15 +30,15 @@ MessageState current_state = IDLE;
 volatile bool message_complete = false;
 
 Intersection tl_west;
+Intersection tl_east;
 
 void uart_transmit_string(const uint8_t *msg, const size_t size)
 {
-    for(int i=0; i<size; i++){
+    for (int i = 0; i < size; i++)
+    {
         Serial.write(msg[i]);
     }
 }
-
-
 
 void setup()
 {
@@ -44,23 +47,34 @@ void setup()
     memset(traffic_string, 0, 64);
     pinMode(4, INPUT_PULLUP);
     init_tl_west(&tl_west);
+    init_tl_east(&tl_east);
 }
 void loop()
 {
     if (message_complete)
     {
-        //we will need to parse the values here
-        //uart_transmit_string(traffic_string, traffic_string_idx);
-        parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
+        // First we send traffic data for WEST intersection then for EAST intersection
+        if (message_count == 0)
+        {
+            // we will need to parse the values here
+            // uart_transmit_string(traffic_string, traffic_string_idx);
+            parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
 
-
-        run_traffic_controller(&tl_west);
-        send_traffic_state(&tl_west);
+            run_traffic_controller(&tl_west);
+            send_traffic_state(&tl_west, 'W');
+        }
+        else
+        {
+            parse_traffic_values(&tl_east, traffic_string, traffic_string_idx);
+            run_traffic_controller(&tl_east);
+            send_traffic_state(&tl_east, 'E');
+        }
         traffic_string_idx = 0;
-        message_complete = false;
+        message_complete = 0;
         current_state = IDLE;
     }
-    if(digitalRead(4) == 0){
+    if (digitalRead(4) == 0)
+    {
         signal_pedestrian(&tl_west);
         // Serial.println("BUTTON PRESSED");
     }
@@ -93,6 +107,7 @@ void serialEvent()
                 // Found the STOP delimiter (0xFF)
                 // Message is complete! Signal loop()
                 message_complete = true;
+                message_count = (message_count + 1) % 2;
                 // Note: State remains IN_PROGRESS until loop() processes it and resets to IDLE
             }
             else if (traffic_string_idx < MAX_MESSAGE_SIZE - 1)

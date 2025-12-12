@@ -16,6 +16,7 @@ SUMO_BINARY = "sumo-gui"
 CONFIG_FILE = "mysim.sumocfg"
 SIM_DURATION = 3600
 TL_ID = "TL_WEST"
+TL_EAST_ID = "TL_EAST"
 DEBUG = True
 FREQUENCY_CONTROL = False
 
@@ -50,13 +51,34 @@ TLWest_Lane_Dictionary = {
     16: "W_P0P1_Upstream_E_P0P2_Downstream_1"
 }
 
-TL_West_Downstream_Lanes = [0,1,5,6,11,12,13]
+TLEast_Lane_Dictionary = {
+    0: "N_P1_Upstream_1", # This is a typo in netedit, this is actually downstream
+    1: "N_P1_Upstream_2",
+    2: "N_P2_Upstream_4",
+    3: "N_P2_Upstream_3",
+    4: "N_P2_Upstream_2",
+    5: "N_P2_Upstream_1",
+    6: "W_P0P1_Upstream_E_P0P2_Downstream_1",
+    7: "W_P0P1_Upstream_E_P0P2_Downstream_2",
+    8: "W_P0P1_Upstream_E_P0P2_Downstream_3",
+    9: "W_P0P2_Downstream_E_P0P1_Upstream_3",
+    10: "W_P0P2_Downstream_E_P0P1_Upstream_2",
+    11: "W_P0P2_Downstream_E_P0P1_Upstream_1",
+    12: "E_P0P2_Downstream_1",
+    13: "E_P0P2_Downstream_2",
+    14: "E_P0_Upstream_2",
+    15: "E_P0_Upstream_1"
+}
 
+TL_West_Downstream_Lanes = [0,1,5,6,11,12,13]
+TL_East_Downstream_Lanes = [12,13,6,7,8,0,1]
 # Mapping SUMO Signal Index (0-13) -> Hardware Lane ID
 # #l16 l15 l14 l7 l7 l9 l10 l10 l4 l3 l2 l2 ped1 ped2
 # Note: Peds are handled separately at the end of the loop. Pedestrians are not simulated by SUMO but by buttons
 TL_West_sumo_to_hw_index = [16, 15, 14, 7, 7, 9, 10, 10, 4, 3, 2, 2]
 
+#l2 l3 l4 l5 l5 l14 l14 l15 l15 
+TL_East_sumo_to_hw_index = [2, 3, 4, 5, 5, 14, 14, 15, 15, 11, 10, 9]
 
 # ==== HELPER FUNCTIONS ==== #
 
@@ -91,7 +113,7 @@ def receive_traffic_state(ser):
         (package_length)(W\E - based on what int. we want to control)(traffic_data)(W\E)
     """
     try:
-        # 1. Read the Length Byte (1 byte)
+        # Read the Length Byte (1 byte)
         length_byte = ser.read(1)
         
         if not length_byte:
@@ -105,40 +127,53 @@ def receive_traffic_state(ser):
              ser.reset_input_buffer()
              return None
 
-        # 2. Read exactly 'packet_size' bytes
+        # Read exactly 'packet_size' bytes
         data = ser.read(packet_size)
         
         if len(data) != packet_size:
             print(f" [RX] Error: Expected {packet_size} bytes, got {len(data)}")
             return None
 
-        # 3. Decode
+        # Decode
         try:
             received_string = data.decode('ascii')
         except UnicodeDecodeError:
             print(f" [RX] Error: Non-ASCII data: {data}")
             return None
 
-        # 4. Validate Framing
-        if received_string[0] != '$' or received_string[-1] != '$':
+        # Validate Framing
+        if received_string[0] not in ['W', 'E']  or received_string[-1] not in ['W', 'E']:
              print(f" [RX] Error: Malformed payload: {received_string}")
              return None
 
         # 5. Parse Statuses
-        # String format: $ [17 cars] [2 peds] $
-        # Indices: $ is 0. Cars are 1-17. Peds are 18-19. $ is 20.c
-        car_lane_cnt = Lane_Cnt_Dict["TL_West"][0]
-        ped_lane_cnt = Lane_Cnt_Dict["TL_West"][1]
-        start_cars = 1
-        end_cars = 1 + car_lane_cnt 
-        start_peds = end_cars 
-        end_peds = start_peds + ped_lane_cnt
-        statuses = {
-            "Car_Lights": received_string[start_cars : end_cars], 
-            "Ped_Lights": received_string[start_peds : end_peds], 
-            "Raw_String": received_string 
-        }
-        return statuses
+        if received_string[0] == 'W' and received_string[-1] == 'W':
+            car_lane_cnt = Lane_Cnt_Dict["TL_West"][0]
+            ped_lane_cnt = Lane_Cnt_Dict["TL_West"][1]
+            start_cars = 1
+            end_cars = 1 + car_lane_cnt 
+            start_peds = end_cars 
+            end_peds = start_peds + ped_lane_cnt
+            statuses = {
+                "Car_Lights": received_string[start_cars : end_cars], 
+                "Ped_Lights": received_string[start_peds : end_peds], 
+                "Raw_String": received_string 
+            }
+            return statuses
+
+        elif received_string[0] == 'E' and received_string[-1] == 'E':
+            car_lane_cnt = Lane_Cnt_Dict["TL_East"][0]
+            ped_lane_cnt = Lane_Cnt_Dict["TL_East"][1]
+            start_cars = 1
+            end_cars = 1 + car_lane_cnt 
+            start_peds = end_cars 
+            end_peds = start_peds + ped_lane_cnt
+            statuses = {
+                "Car_Lights": received_string[start_cars : end_cars], 
+                "Ped_Lights": received_string[start_peds : end_peds], 
+                "Raw_String": received_string 
+            }
+            return statuses
 
     except Exception as e:
         print(f" [RX] General error: {e}")
@@ -215,6 +250,7 @@ def main():
 
 
     TL_WEST_TRAFFIC_VALUES = []
+    TL_EAST_TRAFFIC_VALUES = []
     step = 0
     
     print(f"Running simulation for {SIM_DURATION} steps...")
@@ -222,16 +258,14 @@ def main():
     try:
         while step < SIM_DURATION:
             start_time = time.time()
-            
-            # Step Simulation
             traci.simulationStep()
 
-            # Get Traffic Values
+            #WEST Intersection first
             get_traffic_values(TL_WEST_TRAFFIC_VALUES, TLWest_Lane_Dictionary)
 
             # ==== DEBUG PRINTS ======
             if(DEBUG):
-                print(f"\n[Step {step}] TX Traffic Counts (Total {len(TL_WEST_TRAFFIC_VALUES)} lanes):")
+                print(f"\n[Step {step}] TX Traffic Counts WEST (Total {len(TL_WEST_TRAFFIC_VALUES)} lanes):")
                 print(f"    Raw Counts: {TL_WEST_TRAFFIC_VALUES}")
             
             # Send data to Traffic Control Device (Arduino in this case)
@@ -262,6 +296,41 @@ def main():
                     print(f"Step {step}: No update received.")
                 pass
 
+            # EAST Intersection Now
+            get_traffic_values(TL_EAST_TRAFFIC_VALUES, TLEast_Lane_Dictionary)
+
+            # ==== DEBUG PRINTS ======
+            if(DEBUG):
+                print(f"\n[Step {step}] TX Traffic Counts WEST (Total {len(TL_EAST_TRAFFIC_VALUES)} lanes):")
+                print(f"    Raw Counts: {TL_EAST_TRAFFIC_VALUES}")
+            
+            # Send data to Traffic Control Device (Arduino in this case)
+            packet = build_transmission_packet(TL_EAST_TRAFFIC_VALUES)
+            send_data_chunks(ser, packet)
+
+            # Wait for response from traffic Control Device
+            status_data_east = receive_traffic_state(ser)
+
+            # Change Phase
+            if status_data_east:
+                raw_str = status_data_east["Raw_String"]
+                cars = status_data_east["Car_Lights"]
+                peds = status_data_east["Ped_Lights"]
+
+                if(DEBUG):
+                    print(f"[Step {step}] RX Success: {raw_str}")
+                    print(f"    Cars: {cars} | Peds: {peds}")
+                
+                new_phase = parse_status_to_sumo_phase(status_data_east, TL_East_sumo_to_hw_index, 2)
+
+                if(DEBUG):
+                    print(f"Step {step}: Applying Phase {new_phase}")
+                
+                traci.trafficlight.setRedYellowGreenState(TL_EAST_ID, new_phase)
+            else:
+                if(DEBUG):
+                    print(f"Step {step}: No update received.")
+                pass
             step += 1
             
             # Ensure the loop doesn't run faster than 0.3s

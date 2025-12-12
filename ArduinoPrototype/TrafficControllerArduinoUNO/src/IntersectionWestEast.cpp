@@ -1,5 +1,7 @@
 #include "IntersectionWest.h"
 #include "IntersectionGraph.h"
+#include "IntersectionEast.h"
+
 
 #define IDX(id) get_lane_index_by_id(intr, id)
 #define conn(src, tgt)  add_connection(intr, IDX(src), IDX(tgt))
@@ -41,6 +43,47 @@ void init_tl_west(Intersection* intr)
     add_phase(intr, p1_conns, 4, 5000);
     
     int p2_conns[] = {c_7_1, c_8_2, c_9_13, c_10_11, c_10_12};
+    add_phase(intr, p2_conns, 5, 5000);
+
+    int c_17_18 = conn(17, 18);
+    int p3_conns[] = {c_17_18};
+    add_phase(intr, p3_conns, 1, 5000);    
+}
+
+void init_tl_east(Intersection* intr)
+{
+    intersection_init(intr);
+    for(int i=0; i<=15; i++){
+        add_lane(intr, i);
+    }
+    add_lane(intr, 16);
+    add_lane(intr, 17);
+
+    //phase 0
+    int c_10_13 = conn(10, 13);
+    int c_11_12 = conn(11, 12);
+    int c_15_0 = conn(15, 0);
+    int c_15_6 = conn(15, 6);
+    int c_14_7 = conn(14, 7);
+    int c_14_8 = conn(14, 8);
+
+    //phase 1 
+    int c_9_1 = conn(9, 1);
+
+    //phase 2
+    int c_5_6 = conn(5, 6);
+    int c_5_7 = conn(5, 7);
+    int c_4_8 = conn(4, 8);
+    int c_3_12 = conn(3, 12);
+    int c_2_13 = conn(2, 13);
+
+    int p0_conns[] = {c_10_13, c_11_12, c_15_0, c_15_6, c_14_7, c_14_8};
+    add_phase(intr, p0_conns, 6, 5000);
+
+    int p1_conns[] = {c_9_1, c_10_13, c_11_12};
+    add_phase(intr, p1_conns, 3, 5000);
+    
+    int p2_conns[] = {c_5_6, c_5_7, c_4_8, c_3_12, c_2_13};
     add_phase(intr, p2_conns, 5, 5000);
 
     int c_17_18 = conn(17, 18);

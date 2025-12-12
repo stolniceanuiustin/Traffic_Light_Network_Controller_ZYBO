@@ -47,3 +47,7 @@ Thumbs.db
 
 .rigel_lopper/*
 _ide/*
+_ide
+
+Trafic Simulation/.idea
+ArduinoPrototype/TrafficControllerArduinoUNO/.vscode/*

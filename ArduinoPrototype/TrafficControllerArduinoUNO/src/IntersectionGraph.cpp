@@ -13,7 +13,11 @@ void intersection_init(Intersection *intr)
     intr->phase_cnt = 0;
     intr->current_phase_idx = 0;
 
-    // Clear memory (Optional but good for safety)
+    intr->current_state = STATE_GREEN_RUNNING;
+    intr->phase_start_time = 0;
+    intr->transition_start_time = 0;
+    intr->next_phase_idx = 0;
+    memset(intr->phase_last_serviced, 0, MAX_PHASE_CNT);
     memset(intr->lanes, 0, sizeof(intr->lanes));
     memset(intr->connections, 0, sizeof(intr->connections));
     memset(intr->phases, 0, sizeof(intr->phases));

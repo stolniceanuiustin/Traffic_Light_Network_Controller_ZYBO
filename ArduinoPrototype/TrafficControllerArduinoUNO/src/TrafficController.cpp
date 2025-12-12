@@ -5,6 +5,7 @@
 #include <Arduino.h>
 
 // --- CONSTANTS ---
+#define PEDESTRIAN_COUNT_PER_BUTTON 5
 #define MAX_GREEN_TIME_MS 60000
 #define YELLOW_DURATION_MS 2000
 #define MIN_GREEN_TIME_MS 5000
@@ -17,21 +18,6 @@ uint16_t global_simulation_time = 0;
 
 extern volatile uint16_t system_ticks;
 extern void uart_transmit_string(const uint8_t *msg, const size_t size);
-
-typedef enum
-{
-    STATE_GREEN_RUNNING,
-    STATE_YELLOW_TRANSITION
-} ControllerState;
-
-static ControllerState current_state = STATE_GREEN_RUNNING;
-
-static uint16_t phase_start_time = 0;
-static uint16_t transition_start_time = 0;
-static uint16_t last_update_time = 0;
-
-static int next_phase_idx = 0;
-static uint16_t phase_last_serviced[MAX_PHASE_CNT];
 
 // --- SIMPLE TIME GETTER FOR ZYNQ COMPATIBILITY
 uint16_t get_time_ms()
@@ -73,7 +59,7 @@ int determine_next_phase(Intersection *intr)
 
         if (p > 0)
         {
-            uint64_t wait = now - phase_last_serviced[i];
+            uint64_t wait = now - intr->phase_last_serviced[i];
             if (wait > STARVATION_THRESHOLD_MS && wait > max_wait)
             {
                 max_wait = wait;
@@ -88,7 +74,7 @@ int determine_next_phase(Intersection *intr)
     // === IF NO STARVATION, PROCEED TO DO MAX PRESSURE ALGORITHM
     int best_phase = current_idx;
     int max_pressure = -9999;
-    int current_duration = now - phase_start_time;
+    int current_duration = now - intr->phase_start_time;
 
     int current_phase_pressure = calculate_pressure(intr, current_idx);
     max_pressure = current_phase_pressure;
@@ -127,16 +113,16 @@ void update_lane_status(Intersection *intr, char global_status)
     for (int i = 0; i < curr_p->connection_count; i++)
     {
         int src = intr->connections[curr_p->connection_indices[i]].source_lane_idx;
-        intr->lanes[src].current_light = (current_state == STATE_YELLOW_TRANSITION) ? 'Y' : global_status;
+        intr->lanes[src].current_light = (intr->current_state == STATE_YELLOW_TRANSITION) ? 'Y' : global_status;
     }
 }
 
-void send_traffic_state(Intersection *intr)
+void send_traffic_state(Intersection *intr, char INT_CHAR_ID)
 {
     char status_buffer[2 + intr->lane_cnt + 2 + 1];
     uint8_t buffer_idx = 1;
 
-    status_buffer[buffer_idx++] = '$';
+    status_buffer[buffer_idx++] = INT_CHAR_ID;
 
     // Send Lane Status (Cars). We do not send the lane status for pedestrian here, as we send them separately
     for (int i = 0; i < intr->lane_cnt - 2; i++)
@@ -156,7 +142,7 @@ void send_traffic_state(Intersection *intr)
 
     if (intr->current_phase_idx == PEDESTRIAN_PHASE_IDX)
     {
-        if (current_state == STATE_YELLOW_TRANSITION)
+        if (intr->current_state == STATE_YELLOW_TRANSITION)
         {
             // Usually peds go Red immediately on yellow, or flash, but let's use Y for now if logic demands
             ped_status = 'Y';
@@ -170,7 +156,10 @@ void send_traffic_state(Intersection *intr)
     status_buffer[buffer_idx++] = ped_status;
     status_buffer[buffer_idx++] = ped_status;
 
-    status_buffer[buffer_idx++] = '$';
+    //AFTER ALL LANES WE SEND THE intersection id and potentiometer value(to dirrectly influence traffic values!)
+    status_buffer[buffer_idx++] = (char)'4';
+    status_buffer[buffer_idx++] = (char)'E';
+    status_buffer[buffer_idx++] = INT_CHAR_ID;
 
     uint8_t payload_size = buffer_idx - 1;
     status_buffer[0] = (char)payload_size;
@@ -200,41 +189,40 @@ void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
 
 void signal_pedestrian(Intersection *intr)
 {
-    intr->lanes[get_lane_index_by_id(intr, PEDESTRIAN_LANE_TL_WEST)].car_count = 1000; // So we have MAX PRESSURE on pedestrian
-    // Pedestrians get green as soon as they show up, because i love pedestrians and i want it that way!
+    intr->lanes[get_lane_index_by_id(intr, PEDESTRIAN_LANE_TL_WEST)].car_count = PEDESTRIAN_COUNT_PER_BUTTON; 
 }
 
 void run_traffic_controller(Intersection *intr)
 {
     uint16_t now = get_time_ms();
-    if (phase_start_time == 0)
-        phase_start_time = now;
+    if (intr->phase_start_time == 0)
+        intr->phase_start_time = now;
 
-    if (current_state == STATE_GREEN_RUNNING)
+    if (intr->current_state == STATE_GREEN_RUNNING)
         update_lane_status(intr, 'G');
 
     // State machine
-    switch (current_state)
+    switch (intr->current_state)
     {
     case STATE_GREEN_RUNNING:
-        if (now - phase_start_time > MIN_GREEN_TIME_MS)
+        if (now - intr->phase_start_time > MIN_GREEN_TIME_MS)
         {
             int best = determine_next_phase(intr);
             if (best != intr->current_phase_idx)
             {
-                next_phase_idx = best;
-                current_state = STATE_YELLOW_TRANSITION;
-                transition_start_time = now;
+                intr->next_phase_idx = best;
+                intr->current_state = STATE_YELLOW_TRANSITION;
+                intr->transition_start_time = now;
                 update_lane_status(intr, 'Y');
             }
         }
         break;
     case STATE_YELLOW_TRANSITION:
-        if (now - transition_start_time > YELLOW_DURATION_MS)
+        if (now - intr->transition_start_time > YELLOW_DURATION_MS)
         {
-            intr->current_phase_idx = next_phase_idx;
+            intr->current_phase_idx = intr->next_phase_idx;
 
-            if (next_phase_idx == PEDESTRIAN_PHASE_IDX)
+            if (intr->next_phase_idx == PEDESTRIAN_PHASE_IDX)
             {
                 // TODO REFACTOR THIS SO ITS NOT HARDCODED
                 int ped_lane_idx = get_lane_index_by_id(intr, PEDESTRIAN_LANE_TL_WEST);
@@ -244,9 +232,9 @@ void run_traffic_controller(Intersection *intr)
                 }
             }
 
-            current_state = STATE_GREEN_RUNNING;
-            phase_start_time = now;
-            phase_last_serviced[next_phase_idx] = now;
+            intr->current_state = STATE_GREEN_RUNNING;
+            intr->phase_start_time = now;
+            intr->phase_last_serviced[intr->next_phase_idx] = now;
             update_lane_status(intr, 'G');
         }
         break;

@@ -4,10 +4,18 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_LANE_CNT 32
+//We need to tone this down so this fits into the 2KB of ram of Arduino
+#define MAX_LANE_CNT 20
 #define MAX_CONNECTION_CNT 20
-#define MAX_PHASE_CNT 10
-#define MAX_CONNS_PER_PHASE 16 
+#define MAX_PHASE_CNT 5
+#define MAX_CONNS_PER_PHASE 10
+
+
+typedef enum
+{
+    STATE_GREEN_RUNNING,
+    STATE_YELLOW_TRANSITION
+} ControllerState;
 
 // Represents a single lane
 typedef struct {
@@ -42,6 +50,12 @@ typedef struct {
     uint32_t phase_cnt;
 
     int current_phase_idx;
+
+    ControllerState current_state;
+    uint16_t phase_start_time;
+    uint16_t transition_start_time;
+    uint16_t next_phase_idx;
+    uint16_t phase_last_serviced[MAX_PHASE_CNT];
 } Intersection;
 
 void intersection_init(Intersection *intr);
