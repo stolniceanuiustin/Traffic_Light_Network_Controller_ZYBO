@@ -56,8 +56,6 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 4
-set_param bd.open.in_stealth_mode 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 
@@ -75,7 +73,7 @@ set_property ip_output_repo d:/ProiectSSC/HardwareZYBO/HardwareZYBO.cache/ip [cu
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_vhdl -library xil_defaultlib d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd
+read_vhdl -library xil_defaultlib D:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd
 add_files D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/sources_1/bd/design_1/design_1.bd
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_0/design_1_axi_gpio_0_0_board.xdc]

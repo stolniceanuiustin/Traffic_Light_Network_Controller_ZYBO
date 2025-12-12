@@ -18,6 +18,7 @@ signal state : state_type := idle;
 signal baud_cnt : STD_LOGIC_VECTOR (3 downto 0);
 signal bit_cnt : STD_LOGIC_VECTOR (2 downto 0);
 
+
 begin
 
     -- FSM state transition
