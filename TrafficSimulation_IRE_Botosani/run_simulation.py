@@ -1,222 +1,282 @@
 import sys
 import os
+import serial
+import time
+import struct
+import binascii
 
-
+# ==== SUMO CONFIGURATION ==== #
 SUMO_TOOLS = r"C:\Program Files (x86)\Eclipse\Sumo\tools"
 if SUMO_TOOLS not in sys.path:
     sys.path.append(SUMO_TOOLS)
 
 import traci
+
 SUMO_BINARY = "sumo-gui"
 CONFIG_FILE = "mysim.sumocfg"
 SIM_DURATION = 3600
 TL_ID = "TL_WEST"
+DEBUG = True
+FREQUENCY_CONTROL = False
 
-# --- Control Parameters ---
-MIN_GREEN_TIME = 15     # Minimum time for vehicle phases
-MIN_PED_GREEN_TIME = 10 # Minimum time for pedestrian phase
-SWITCH_TIME = 3         # Duration of red clearance phase
+# ==== SERIAL CONFIGURATION ==== 
+SERIAL_PORT = 'COM21' 
+BAUD_RATE = 9600
+CHUNK_SIZE = 8
+START_STOP_DELIMITER = 0xFF 
+PADDING_BYTE = 0x00
+RECEIVE_TIMEOUT = 5  
 
-# --- Lane Definitions ---
-# P0: WEST EAST
-TLWest_Phase0_Upstream = [
-    "W_P0_UPSTREAM_1", "W_P0_UPSTREAM_2", "W_P0_UPSTREAM_3", 
-    "W_P0P1_Upstream_E_P0P2_Downstream_1", "W_P0P1_Upstream_E_P0P2_Downstream_2", "W_P0P1_Upstream_E_P0P2_Downstream_3"
-]
-TLWest_Phase0_Downstream = [
-    "W_P0P2_Downstream_E_P0P1_Upstream_1", "W_P0P2_Downstream_E_P0P1_Upstream_2", "W_P0P2_Downstream_E_P0P1_Upstream_3",
-    "W_P0P1P2_Downstream_1", "W_P0P1P2_Downstream_2"
-]
+# ==== LANE & MAPPING DEFINITIONS ==== 
 
-# P1: EAST -> West and East -> South
-TLWest_Phase1_Upstream = [
-    "W_P0P1_Upstream_E_P0P2_Downstream_1",
-    "W_P0P1_Upstream_E_P0P2_Downstream_2",
-    "W_P0P1_Upstream_E_P0P2_Downstream_3"
-]
-TLWest_Phase1_Downstream = [
-    "W_P0P1P2_Downstream_1", "W_P0P2_Downstream_E_P0P1_Upstream_3"
-]
-
-# P2: SOUTH ->  LEFT LEFT RIGHT RIGHT
-TLWest_Phase2_Upstream = [
-    "S_P2_UPSTREAM_1",
-    "S_P2_UPSTREAM_2",
-    "S_P2_UPSTREAM_3",
-    "S_P2_UPSTREAM_4"
-]
-TLWest_Phase2_Downstream = [
-    "W_P0P2_Downstream_E_P0P1_Upstream_1",
-    "W_P0P2_Downstream_E_P0P1_Upstream_2",
-    "W_P0P2_Downstream_E_P0P1_Upstream_3",
-    "W_P0P1P2_Downstream_1",
-    "W_P0P1P2_Downstream_2"
-]
-
-# P3: Pedestrian Crossing Detectors
-PEDESTRIAN_CROSSINGS = [":TL_WEST_c0_0", ":TL_WEST_c1_0"]
-
-
-# --- Phase Definitions for TL_WEST (14 signals) ---
-
-PHASE_0_GREEN =       "GGrrrrrrGGGGrr"
-PHASE_1_GREEN =       "GGGrrrrrGrrrrr"
-PHASE_2_GREEN =       "rrrGGGGGrrrrrr"
-PHASE_3_GREEN =       "rrrrrrrrrrrrGG" # Pedestrians
-
-# SAFETY STATE: All Red for transitions
-ALL_RED_STATE =       "rrrrrrrrrrrrrr"
-
-# Mapping to calculate vehicle pressure
-PHASE_LANE_MAP = {
-    "P0": (TLWest_Phase0_Upstream, TLWest_Phase0_Downstream),
-    "P1": (TLWest_Phase1_Upstream, TLWest_Phase1_Downstream),
-    "P2": (TLWest_Phase2_Upstream, TLWest_Phase2_Downstream),
+# Maps Lane IDs(0-16) to SUMO Lane ID Strings
+TLWest_Lane_Dictionary = {
+    0: "W_P0P1P2_Downstream_1",
+    1: "W_P0P1P2_Downstream_2",
+    2: "W_P0_UPSTREAM_3",
+    3: "W_P0_UPSTREAM_2",
+    4: "W_P0_UPSTREAM_1",
+    5: "E5_1",  
+    6: "E5_2",  
+    7: "S_P2_UPSTREAM_4",
+    8: "S_P2_UPSTREAM_3",
+    9: "S_P2_UPSTREAM_2",
+    10: "S_P2_UPSTREAM_1",
+    11: "W_P0P2_Downstream_E_P0P1_Upstream_1",
+    12: "W_P0P2_Downstream_E_P0P1_Upstream_2",
+    13: "W_P0P2_Downstream_E_P0P1_Upstream_3",
+    14: "W_P0P1_Upstream_E_P0P2_Downstream_3",
+    15: "W_P0P1_Upstream_E_P0P2_Downstream_2",
+    16: "W_P0P1_Upstream_E_P0P2_Downstream_1"
 }
 
-# Mapping for state transitions
-PHASE_STATE_MAP = {
-    "P0": PHASE_0_GREEN,    "P1": PHASE_1_GREEN,
-    "P2": PHASE_2_GREEN,    "P3": PHASE_3_GREEN
+TL_West_Downstream_Lanes = [0,1,5,6,11,12,13]
+
+# Mapping SUMO Signal Index (0-13) -> Hardware Lane ID
+# #l16 l15 l14 l7 l7 l9 l10 l10 l4 l3 l2 l2 ped1 ped2
+# Note: Peds are handled separately at the end of the loop. Pedestrians are not simulated by SUMO but by buttons
+TL_West_sumo_to_hw_index = [16, 15, 14, 7, 7, 9, 10, 10, 4, 3, 2, 2]
+
+
+# ==== HELPER FUNCTIONS ==== #
+
+def build_transmission_packet(values):
+    """Encodes and chunks the traffic values for transmission"""
+    encoded_data = [val + 1 for val in values]
+    full_message_body = [START_STOP_DELIMITER] + encoded_data + [START_STOP_DELIMITER]
+
+    message_length = len(full_message_body)
+    padding_needed = (CHUNK_SIZE - (message_length % CHUNK_SIZE)) % CHUNK_SIZE
+    padded_message = full_message_body + [PADDING_BYTE] * padding_needed
+    
+    bytes_to_send = bytes(padded_message)
+    if(DEBUG):
+        print(f" [TX] Message Size: {message_length} bytes.")
+    return bytes_to_send
+
+def send_data_chunks(ser, bytes_to_send):
+    """Sends the prepared byte sequence in 8-byte chunks."""
+    for i in range(0, len(bytes_to_send), CHUNK_SIZE):
+        chunk = bytes_to_send[i:i + CHUNK_SIZE]
+        ser.write(chunk)
+        time.sleep(0.005) # Tiny delay for stability
+
+Lane_Cnt_Dict = {
+    "TL_West": (17, 2),
+    "TL_East": (16, 2)
 }
 
-# Cycle order for Max Pressure check
-CYCLE = ["P0", "P1", "P2", "P3"]
-PHASES_PER_CYCLE = len(CYCLE)
-
-
-# --- Max Pressure Logic ---
-class MaxPressureController:
-    def __init__(self, tls_id):
-        self.id = tls_id
-        self.current_phase_key = "P0"
-        self.timer = 0
-        self.is_switching = False
+def receive_traffic_state(ser):
+    """ Reads a length-prefixed packet from the Arduino. The format is the following:
+        (package_length)(W\E - based on what int. we want to control)(traffic_data)(W\E)
+    """
+    try:
+        # 1. Read the Length Byte (1 byte)
+        length_byte = ser.read(1)
         
-        traci.trafficlight.setRedYellowGreenState(self.id, PHASE_STATE_MAP["P0"])
-        traci.trafficlight.setProgram(self.id, "off") 
-
-    def get_pressure_for_phase(self, phase_key):
-        """Calculates Max Pressure (Upstream Halting - Downstream Halting) for a phase."""
-        if phase_key == "P3":
-            # P3 (Pedestrian) pressure is based on waiting pedestrians
-            waiting_pedestrians = 0
-            for crossing in PEDESTRIAN_CROSSINGS:
-                try:
-                    waiting_pedestrians += traci.lane.getLastStepVehicleNumber(crossing)
-                except:
-                    pass
-            return waiting_pedestrians * 10 
-        
-        upstream_lanes, downstream_lanes = PHASE_LANE_MAP[phase_key]
-        
-        def get_halting_count(lane_list):
-            count = 0
-            for lane in lane_list:
-                try:
-                    count += traci.lane.getLastStepHaltingNumber(lane)
-                except:
-                    pass
-            return count
-
-        occ_up = get_halting_count(upstream_lanes)
-        occ_down = get_halting_count(downstream_lanes)
-        
-        return occ_up - occ_down
-
-    def get_max_pressure_phase(self):
-        """Returns the phase key (P0-P3) with the highest pressure."""
-        pressures = {}
-        for phase in CYCLE:
-            pressures[phase] = self.get_pressure_for_phase(phase)
-        
-        max_pressure = -float('inf')
-        max_phase = self.current_phase_key 
-
-        for phase, pressure in pressures.items():
-            if pressure > max_pressure:
-                max_pressure = pressure
-                max_phase = phase
-                
-        return max_phase, max_pressure
-
-    def update(self):
-        self.timer += 1
-        
-        # --- 1. Handle All-Red Switching Logic ---
-        if self.is_switching:
-            if self.timer >= SWITCH_TIME:
-                self.timer = 0
-                self.is_switching = False
-                
-                # Parse target index from 'yXtoY'
-                try:
-                    target_idx = int(self.current_phase_key.split('to')[1])
-                    next_green_key = CYCLE[target_idx]
-                except:
-                    # Fallback logic
-                    current_idx = int(self.current_phase_key[1]) 
-                    next_green_key = CYCLE[(current_idx + 1) % PHASES_PER_CYCLE]
-
-                self.current_phase_key = next_green_key
-
-                traci.trafficlight.setRedYellowGreenState(
-                    self.id, PHASE_STATE_MAP[self.current_phase_key]
-                )
-            return
-
-        # --- 2. Check for Phase Switch ---
-        min_duration = MIN_PED_GREEN_TIME if self.current_phase_key == "P3" else MIN_GREEN_TIME
-        
-        if self.timer >= min_duration:
+        if not length_byte:
+            return None # Timeout
             
-            next_max_phase, next_max_pressure = self.get_max_pressure_phase()
-            current_pressure = self.get_pressure_for_phase(self.current_phase_key)
-            
-            # Switch if another phase has higher pressure
-            if next_max_phase != self.current_phase_key and next_max_pressure > current_pressure:
-                
-                self.is_switching = True
-                self.timer = 0
-                
-                current_idx = CYCLE.index(self.current_phase_key)
-                target_idx = CYCLE.index(next_max_phase) 
-                
-                yellow_key = f"y{current_idx}to{target_idx}"
-                self.current_phase_key = yellow_key
-                
-                # We don't overcomplicate with yellow state, all red will suffice
-                traci.trafficlight.setRedYellowGreenState(self.id, ALL_RED_STATE)
+        packet_size = int.from_bytes(length_byte, byteorder='big')
+        
+        # Sanity Check
+        if packet_size < 5 or packet_size > 64:
+             print(f" [RX] Warning: Invalid packet size ({packet_size}). Flushing.")
+             ser.reset_input_buffer()
+             return None
+
+        # 2. Read exactly 'packet_size' bytes
+        data = ser.read(packet_size)
+        
+        if len(data) != packet_size:
+            print(f" [RX] Error: Expected {packet_size} bytes, got {len(data)}")
+            return None
+
+        # 3. Decode
+        try:
+            received_string = data.decode('ascii')
+        except UnicodeDecodeError:
+            print(f" [RX] Error: Non-ASCII data: {data}")
+            return None
+
+        # 4. Validate Framing
+        if received_string[0] != '$' or received_string[-1] != '$':
+             print(f" [RX] Error: Malformed payload: {received_string}")
+             return None
+
+        # 5. Parse Statuses
+        # String format: $ [17 cars] [2 peds] $
+        # Indices: $ is 0. Cars are 1-17. Peds are 18-19. $ is 20.c
+        car_lane_cnt = Lane_Cnt_Dict["TL_West"][0]
+        ped_lane_cnt = Lane_Cnt_Dict["TL_West"][1]
+        start_cars = 1
+        end_cars = 1 + car_lane_cnt 
+        start_peds = end_cars 
+        end_peds = start_peds + ped_lane_cnt
+        statuses = {
+            "Car_Lights": received_string[start_cars : end_cars], 
+            "Ped_Lights": received_string[start_peds : end_peds], 
+            "Raw_String": received_string 
+        }
+        return statuses
+
+    except Exception as e:
+        print(f" [RX] General error: {e}")
+        return None
+
+def get_traffic_values(Traffic_Values, Lane_Dictionary):
+    """Refreshes the Traffic_Values list with current SUMO data"""
+    Traffic_Values.clear() # Clear previous step data
+    
+    for i in range(len(Lane_Dictionary)):
+        lane_id = Lane_Dictionary.get(i)
+        if lane_id:
+            try:
+                # count = 
+                val_to_send = 0
+                if i in TL_West_Downstream_Lanes:
+                     occupancy_fraction = traci.lane.getLastStepOccupancy(lane_id)
+                     if(occupancy_fraction >= 90):
+                        val_to_send = occupancy_fraction / 10
+                else:
+                    val_to_send = traci.lane.getLastStepVehicleNumber(lane_id)
+                if val_to_send > 254: val_to_send = 254
+                Traffic_Values.append(int(val_to_send))
+            except traci.exceptions.TraCIException:
+                Traffic_Values.append(0)
+        else:
+            Traffic_Values.append(0)
 
 
-# --- Main Simulation Loop ---
+#this works only for traffic light west for now
+def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
+    """Converts the Hardware Status Dictionary to a SUMO phase string"""
+    car_string = status_dict["Car_Lights"]
+    peds = status_dict["Ped_Lights"] 
+    
+    def translate(char):
+        if char == 'G': return 'G'
+        if char == 'Y': return 'y'
+        if char == 'R': return 'r'
+        return 'N' # Default/N
+
+    phase_chars = []
+    
+    for lane_id in sumo_to_hw:
+        status = car_string[lane_id]
+        phase_chars.append(translate(status))
+
+    for i in range(ped_lane_cnt):
+        phase_chars.append(translate(peds[i]))
+    return "".join(phase_chars)
+
+
+# ==== MAIN SIMULATION LOOP ==== 
+
 def main():
     sumo_cmd = [SUMO_BINARY, "-c", CONFIG_FILE]
     
+    # Start SUMO
     try:
         traci.start(sumo_cmd)
     except traci.exceptions.FatalTraCIError as e:
-        print(f"FATAL ERROR: Could not start SUMO or connect via TraCI. Details: {e}")
+        print(f"FATAL ERROR: {e}")
         sys.exit(1)
 
+    # Open Serial
     try:
-        controller = MaxPressureController(TL_ID)
-    except traci.exceptions.TraCIException:
-        print(f"Error: Traffic light ID '{TL_ID}' not found or connection issue. Exiting.")
+        ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1.0)
+        time.sleep(2) # Wait for Arduino reset
+        print("Serial Port Opened. Starting Simulation...")
+    except serial.SerialException as e:
+        print(f"Error opening serial port: {e}")
         traci.close()
         sys.exit(1)
 
 
+    TL_WEST_TRAFFIC_VALUES = []
     step = 0
+    
     print(f"Running simulation for {SIM_DURATION} steps...")
-    while step < SIM_DURATION:
-        traci.simulationStep()
-        controller.update()
-        step += 1
+    
+    try:
+        while step < SIM_DURATION:
+            start_time = time.time()
+            
+            # Step Simulation
+            traci.simulationStep()
 
-    traci.close()
-    print("Simulation successfully ended.")
+            # Get Traffic Values
+            get_traffic_values(TL_WEST_TRAFFIC_VALUES, TLWest_Lane_Dictionary)
 
+            # ==== DEBUG PRINTS ======
+            if(DEBUG):
+                print(f"\n[Step {step}] TX Traffic Counts (Total {len(TL_WEST_TRAFFIC_VALUES)} lanes):")
+                print(f"    Raw Counts: {TL_WEST_TRAFFIC_VALUES}")
+            
+            # Send data to Traffic Control Device (Arduino in this case)
+            packet = build_transmission_packet(TL_WEST_TRAFFIC_VALUES)
+            send_data_chunks(ser, packet)
+
+            # Wait for response from traffic Control Device
+            status_data_west = receive_traffic_state(ser)
+
+            # Change Phase
+            if status_data_west:
+                raw_str = status_data_west["Raw_String"]
+                cars = status_data_west["Car_Lights"]
+                peds = status_data_west["Ped_Lights"]
+
+                if(DEBUG):
+                    print(f"[Step {step}] RX Success: {raw_str}")
+                    print(f"    Cars: {cars} | Peds: {peds}")
+                
+                new_phase = parse_status_to_sumo_phase(status_data_west, TL_West_sumo_to_hw_index, 2)
+
+                if(DEBUG):
+                    print(f"Step {step}: Applying Phase {new_phase}")
+                
+                traci.trafficlight.setRedYellowGreenState(TL_ID, new_phase)
+            else:
+                if(DEBUG):
+                    print(f"Step {step}: No update received.")
+                pass
+
+            step += 1
+            
+            # Ensure the loop doesn't run faster than 0.3s
+            if(FREQUENCY_CONTROL):
+                elapsed = time.time() - start_time
+                if elapsed < 0.3:
+                    time.sleep(0.3 - elapsed)
+
+    except KeyboardInterrupt:
+        print("\nStopping...")
+    finally:
+        traci.close()
+        if ser.is_open:
+            ser.close()
+        print("Simulation Ended.")
 
 if __name__ == "__main__":
     main()

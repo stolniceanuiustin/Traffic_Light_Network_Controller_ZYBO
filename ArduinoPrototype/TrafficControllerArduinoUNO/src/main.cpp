@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <stdint.h>
-
+#include "IntersectionGraph.h"
+#include "IntersectionWest.h"
+#include "TrafficController.h"
 // we will recieve an array that will look like this:
 // 0xFF(traffic_val_lane1)(traffic_val_lane2)(traffic_val_lane3)...0xFF
 // 0xFF and 0 are reserved, so we can't use them
@@ -24,39 +26,43 @@ MessageState current_state = IDLE;
 
 volatile bool message_complete = false;
 
+Intersection tl_west;
+
+void uart_transmit_string(const uint8_t *msg, const size_t size)
+{
+    for(int i=0; i<size; i++){
+        Serial.write(msg[i]);
+    }
+}
+
+
+
 void setup()
 {
     Serial.begin(9600);
     delay(2000);
     memset(traffic_string, 0, 64);
-    Serial.println("Setup ready. Waiting for 8byte chunks on serial port");
+    pinMode(4, INPUT_PULLUP);
+    init_tl_west(&tl_west);
 }
 void loop()
 {
     if (message_complete)
     {
+        //we will need to parse the values here
+        //uart_transmit_string(traffic_string, traffic_string_idx);
+        parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
 
-        Serial.println("\n--- MESSAGE RECEIVED ---");
-        Serial.print("Total Assembled Size: ");
-        Serial.println(traffic_string_idx);
 
-        // The traffic_string now contains  only the data we need
-        // traffic_string[0] to [traffic_string_index] = Data (corrected: value - 1)
-
-        for (int i = 0; i <= 100; i++)
-        {
-            Serial.print("Corrected Values: ");
-            for (int i = 0; i < traffic_string_idx; i++)
-            {
-                Serial.print((uint32_t)traffic_string[i]);
-                Serial.print(" ");
-            }
-            Serial.println();
-            delay(100);
-        }
+        run_traffic_controller(&tl_west);
+        send_traffic_state(&tl_west);
         traffic_string_idx = 0;
         message_complete = false;
         current_state = IDLE;
+    }
+    if(digitalRead(4) == 0){
+        signal_pedestrian(&tl_west);
+        // Serial.println("BUTTON PRESSED");
     }
 }
 
@@ -76,8 +82,7 @@ void serialEvent()
                 // Found the START delimiter (0xFF)
                 current_state = IN_PROGRESS;
                 traffic_string_idx = 0; // Reset buffer for new message
-
-                Serial.println("START frame detected. Receiving data...");
+                memset(traffic_string, 0, 64);
             }
             break;
 
@@ -101,8 +106,6 @@ void serialEvent()
             }
             else
             {
-                // Buffer Overflow Safety Check. Should never get here
-                Serial.println("ERROR: Message too large. Buffer overflow!");
                 current_state = IDLE; // Abandon current message
                 traffic_string_idx = 0;
             }
