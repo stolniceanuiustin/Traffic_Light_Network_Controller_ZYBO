@@ -9,5 +9,5 @@ The advantage of running this on a robust system like a Zybo - ZYNQ 7000 is the 
 You can model virtually any interseciton layout in the PS, given you know a little bit of C. A GUI could very well be implemented, and i did(or shall i say, my team did) for a very similar project.   
 
 
-##CUSTOM UART PROTOCOL 
+## CUSTOM UART PROTOCOL   
 I designed, in the PL part, a custom UART interface. The recieving end features a 8 byte circual buffer and runs at a fixed UART of 9600. I plan to make the UART rate variable by changing something in PS(after i make this work). The implementation will be available in the documentation.
