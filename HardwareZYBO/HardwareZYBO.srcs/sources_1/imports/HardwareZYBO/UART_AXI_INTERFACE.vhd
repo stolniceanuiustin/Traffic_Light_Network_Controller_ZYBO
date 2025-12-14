@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity uart_axi_interface is
   Port ( 
@@ -20,7 +20,7 @@ end uart_axi_interface;
 architecture Behavioral of uart_axi_interface is
 
     component transmitfsm
-    Port ( clk: STD_LOGIC;
+    Port ( clk: in STD_LOGIC;
            rst : in STD_LOGIC;
            baud_en : in STD_LOGIC;
            tx_en : in STD_LOGIC;
@@ -44,7 +44,7 @@ architecture Behavioral of uart_axi_interface is
     signal cnt_x16 : STD_LOGIC_VECTOR(9 downto 0) := (others => '0');
     
     --A circular buffer for recieving data - this fixes the garbage values we get
-    constant FIFO_DEPTH : integer := 8;
+    constant FIFO_DEPTH : integer := 64;
     type fifo_mem_type is array (0 to FIFO_DEPTH-1) of std_logic_vector(7 downto 0); 
     signal fifo_mem : fifo_mem_type := (others => (others => '0'));
     
@@ -55,12 +55,15 @@ architecture Behavioral of uart_axi_interface is
     signal rx_byte : std_logic_vector(7 downto 0);
     signal rx_ready : std_logic;
     
-    
+    signal rx_en_q : std_logic;    
     signal rx_ready_q : std_logic := '0'; --stores the previous state of rx_ready, because rx_ready stays high for 8 clock cycles
+    
+    --RX WRITE EN is toggled when the recieved byte is ready for reading. DO NOT MISTAKE IT FOR RX_EN which is a signal from the CPU to read from the buffer!
     signal rx_write_en : std_logic;
+    signal pop_request : std_logic;
 begin
 
-    rx_ready_update_logic: process(clk)
+    edge_detector_rx_ready: process(clk)
     begin 
         if rising_edge(clk) then 
             rx_ready_q <= rx_ready;
@@ -69,34 +72,43 @@ begin
     
     rx_write_en <= rx_ready and not rx_ready_q;
     
-    fifo_wr: process(clk)
+    edge_detector_pop_request: process(clk)
     begin 
         if rising_edge(clk) then 
-        --write byte into FIFO if recieveFSM has new data && FIFO not fuill 
-            if rx_write_en = '1' and fifo_count < FIFO_DEPTH then 
+            rx_en_q <= gpio_rx_en;
+        end if;
+    end process;
+    --only pop one element  on the rising edge
+    pop_request <= gpio_rx_en and not rx_en_q;
+    
+    fifo_controller: process(clk)
+    begin 
+        if rising_edge(clk) then 
+            
+            -- CASE A: Read and Write happen at the same time - should not happpen but we treat this anyways
+            if (rx_write_en = '1' and fifo_count < FIFO_DEPTH) and (pop_request = '1' and fifo_count > 0) then
+                fifo_mem(fifo_wr_ptr) <= rx_byte;
+                fifo_wr_ptr <= (fifo_wr_ptr + 1) mod FIFO_DEPTH;
+                fifo_rd_ptr <= (fifo_rd_ptr + 1) mod FIFO_DEPTH;
+                
+            -- CASE B: Fifo Write
+            elsif rx_write_en = '1' and fifo_count < FIFO_DEPTH then 
                 fifo_mem(fifo_wr_ptr) <= rx_byte; 
                 fifo_wr_ptr <= (fifo_wr_ptr + 1) mod FIFO_DEPTH;
                 fifo_count <= fifo_count + 1;
-            end if;
-        end if;
-    end process;
-    
-    --So CPU puts gpio_rx_en on 1, then reads, then puts it back to 0 when it got all the data!
-    fifo_rd: process(clk)
-    begin 
-        if rising_edge(clk) thne
-        --we assume CPU will read while gpio_rx_ready is on so we autoadvance!
-            if fifo_count > 0 and gpio_rx_en = '1' then 
+                
+            -- CASE C: Fifo Read
+            elsif pop_request = '1' and fifo_count > 0 then 
                 fifo_rd_ptr <= (fifo_rd_ptr + 1) mod FIFO_DEPTH;
                 fifo_count <= fifo_count - 1;
             end if;
         end if;
     end process;
-    
+
     gpio_rx_ready <= '1' when fifo_count > 0 else '0';
     gpio_rx_data <= fifo_mem(fifo_rd_ptr) when fifo_count > 0 else (others => '0');
 
-    -- 10,000,000 / 9600 = 5208 - 1 = 5207
+    -- 100,000,000 / 9600 = 10416 - 1 = 10415
     process(clk)
     begin
         if rising_edge(clk) then
@@ -113,7 +125,7 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            if cnt_x16 = 650 then -- 5208 / 16
+            if cnt_x16 = 650 then -- 10415 / 16
                 baud_en_x16 <= '1';
                 cnt_x16 <= (others => '0');
             else

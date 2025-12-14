@@ -56,8 +56,6 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "design_1_uart_axi_interface_0_0_synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 4
-set_param bd.open.in_stealth_mode 1
 set_param project.vivado.isBlockSynthRun true
 OPTRACE "Creating in-memory project" START { }
 set_param ips.modRefOverrideMrefDirPath d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/mref
@@ -83,7 +81,7 @@ read_vhdl -library xil_defaultlib {
   D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/sources_1/imports/HardwareZYBO/transmitfsm.vhd
   D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/sources_1/imports/HardwareZYBO/UART_AXI_INTERFACE.vhd
 }
-read_ip -quiet d:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/sources_1/bd/design_1/ip/design_1_uart_axi_interface_0_0/design_1_uart_axi_interface_0_0.xci
+read_ip -quiet D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/sources_1/bd/design_1/ip/design_1_uart_axi_interface_0_0/design_1_uart_axi_interface_0_0.xci
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

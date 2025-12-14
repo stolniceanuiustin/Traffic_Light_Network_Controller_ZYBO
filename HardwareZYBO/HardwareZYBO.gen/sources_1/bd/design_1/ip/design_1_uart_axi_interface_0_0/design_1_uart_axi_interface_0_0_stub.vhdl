@@ -2,7 +2,7 @@
 -- Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
--- Date        : Wed Nov 26 16:26:23 2025
+-- Date        : Sun Dec 14 17:26:47 2025
 -- Host        : Iustin-PC running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_uart_axi_interface_0_0/design_1_uart_axi_interface_0_0_stub.vhdl
@@ -20,6 +20,7 @@ entity design_1_uart_axi_interface_0_0 is
     tx_pin : out STD_LOGIC;
     gpio_tx_data : in STD_LOGIC_VECTOR ( 7 downto 0 );
     gpio_tx_start : in STD_LOGIC;
+    gpio_rx_en : in STD_LOGIC;
     gpio_rx_data : out STD_LOGIC_VECTOR ( 7 downto 0 );
     gpio_rx_ready : out STD_LOGIC;
     gpio_tx_rdy : out STD_LOGIC
@@ -39,7 +40,7 @@ architecture stub of design_1_uart_axi_interface_0_0 is
   attribute syn_black_box : boolean;
   attribute black_box_pad_pin : string;
   attribute syn_black_box of stub : architecture is true;
-  attribute black_box_pad_pin of stub : architecture is "clk,rx_pin,tx_pin,gpio_tx_data[7:0],gpio_tx_start,gpio_rx_data[7:0],gpio_rx_ready,gpio_tx_rdy";
+  attribute black_box_pad_pin of stub : architecture is "clk,rx_pin,tx_pin,gpio_tx_data[7:0],gpio_tx_start,gpio_rx_en,gpio_rx_data[7:0],gpio_rx_ready,gpio_tx_rdy";
   attribute x_interface_info : string;
   attribute x_interface_info of clk : signal is "xilinx.com:signal:clock:1.0 clk CLK";
   attribute x_interface_mode : string;

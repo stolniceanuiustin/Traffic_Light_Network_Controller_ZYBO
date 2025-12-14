@@ -101,6 +101,9 @@ vcom -work xil_defaultlib -93  \
 "../../../bd/design_1/ip/design_1_xadc_wiz_0_0/design_1_xadc_wiz_0_0_axi_xadc.vhd" \
 "../../../bd/design_1/ip/design_1_xadc_wiz_0_0/design_1_xadc_wiz_0_0.vhd" \
 
+vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" "+incdir+E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" -l xilinx_vip -l xpm -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_19 -l processing_system7_vip_v1_0_21 -l xil_defaultlib -l axi_lite_ipif_v3_0_4 -l lib_cdc_v1_0_3 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_35 -l xlconstant_v1_1_9 -l proc_sys_reset_v5_0_16 -l smartconnect_v1_0 -l axi_register_slice_v2_1_33 \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/sim/bd_afc3.v" \
+
 vlog -work xlconstant_v1_1_9  -v2k5 "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" "+incdir+E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" -l xilinx_vip -l xpm -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_19 -l processing_system7_vip_v1_0_21 -l xil_defaultlib -l axi_lite_ipif_v3_0_4 -l lib_cdc_v1_0_3 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_35 -l xlconstant_v1_1_9 -l proc_sys_reset_v5_0_16 -l smartconnect_v1_0 -l axi_register_slice_v2_1_33 \
 "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/e2d2/hdl/xlconstant_v1_1_vl_rfs.v" \
 
@@ -240,9 +243,13 @@ vlog -work xil_defaultlib  -sv2k12 "+incdir+../../../../HardwareZYBO.gen/sources
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_86/sim/bd_afc3_m08wn_0.sv" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_87/sim/bd_afc3_m08bn_0.sv" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_88/sim/bd_afc3_m08e_0.sv" \
-
-vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" "+incdir+E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" -l xilinx_vip -l xpm -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_19 -l processing_system7_vip_v1_0_21 -l xil_defaultlib -l axi_lite_ipif_v3_0_4 -l lib_cdc_v1_0_3 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_35 -l xlconstant_v1_1_9 -l proc_sys_reset_v5_0_16 -l smartconnect_v1_0 -l axi_register_slice_v2_1_33 \
-"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/sim/bd_afc3.v" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_89/sim/bd_afc3_m09s2a_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_90/sim/bd_afc3_m09arn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_91/sim/bd_afc3_m09rn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_92/sim/bd_afc3_m09awn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_93/sim/bd_afc3_m09wn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_94/sim/bd_afc3_m09bn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_95/sim/bd_afc3_m09e_0.sv" \
 
 vlog -work axi_register_slice_v2_1_33  -v2k5 "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" "+incdir+E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" -l xilinx_vip -l xpm -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_19 -l processing_system7_vip_v1_0_21 -l xil_defaultlib -l axi_lite_ipif_v3_0_4 -l lib_cdc_v1_0_3 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_35 -l xlconstant_v1_1_9 -l proc_sys_reset_v5_0_16 -l smartconnect_v1_0 -l axi_register_slice_v2_1_33 \
 "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v" \
@@ -255,6 +262,7 @@ vcom -work xil_defaultlib -93  \
 "../../../bd/design_1/ip/design_1_axi_gpio_0_5/sim/design_1_axi_gpio_0_5.vhd" \
 "../../../bd/design_1/ip/design_1_axi_gpio_0_6/sim/design_1_axi_gpio_0_6.vhd" \
 "../../../bd/design_1/ip/design_1_axi_gpio_0_7/sim/design_1_axi_gpio_0_7.vhd" \
+"../../../bd/design_1/ip/design_1_axi_gpio_0_8/sim/design_1_axi_gpio_0_8.vhd" \
 "../../../bd/design_1/sim/design_1.vhd" \
 
 vlog -work xil_defaultlib \

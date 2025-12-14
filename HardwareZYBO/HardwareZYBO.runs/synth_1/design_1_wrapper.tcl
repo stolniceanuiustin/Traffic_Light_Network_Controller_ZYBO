@@ -170,6 +170,12 @@ set_property used_in_implementation false [get_files -all d:/ProiectSSC/Hardware
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_85/bd_afc3_m08awn_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_86/bd_afc3_m08wn_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_87/bd_afc3_m08bn_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_89/bd_afc3_m09s2a_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_90/bd_afc3_m09arn_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_91/bd_afc3_m09rn_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_92/bd_afc3_m09awn_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_93/bd_afc3_m09wn_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_94/bd_afc3_m09bn_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/smartconnect.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0_board.xdc]
@@ -184,6 +190,9 @@ set_property used_in_implementation false [get_files -all d:/ProiectSSC/Hardware
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7_board.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8_board.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8.xdc]
 set_property used_in_implementation false [get_files -all d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/design_1_ooc.xdc]
 
 OPTRACE "Adding files" END { }

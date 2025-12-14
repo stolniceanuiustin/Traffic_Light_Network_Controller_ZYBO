@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
---Date        : Wed Nov 26 16:36:12 2025
+--Date        : Sun Dec 14 17:25:12 2025
 --Host        : Iustin-PC running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -50,7 +50,7 @@ entity design_1 is
     vaux7p : in STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=13,numReposBlks=13,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=1,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=9,da_board_cnt=3,da_clkrst_cnt=1,da_ps7_cnt=1,synth_mode=Hierarchical}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=14,numReposBlks=14,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=1,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=10,da_board_cnt=3,da_clkrst_cnt=1,da_ps7_cnt=1,synth_mode=Hierarchical}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -136,6 +136,7 @@ architecture STRUCTURE of design_1 is
     tx_pin : out STD_LOGIC;
     gpio_tx_data : in STD_LOGIC_VECTOR ( 7 downto 0 );
     gpio_tx_start : in STD_LOGIC;
+    gpio_rx_en : in STD_LOGIC;
     gpio_rx_data : out STD_LOGIC_VECTOR ( 7 downto 0 );
     gpio_rx_ready : out STD_LOGIC;
     gpio_tx_rdy : out STD_LOGIC
@@ -519,7 +520,26 @@ architecture STRUCTURE of design_1 is
     M08_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
     M08_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
     M08_AXI_rvalid : in STD_LOGIC;
-    M08_AXI_rready : out STD_LOGIC
+    M08_AXI_rready : out STD_LOGIC;
+    M09_AXI_awaddr : out STD_LOGIC_VECTOR ( 8 downto 0 );
+    M09_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M09_AXI_awvalid : out STD_LOGIC;
+    M09_AXI_awready : in STD_LOGIC;
+    M09_AXI_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M09_AXI_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M09_AXI_wvalid : out STD_LOGIC;
+    M09_AXI_wready : in STD_LOGIC;
+    M09_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M09_AXI_bvalid : in STD_LOGIC;
+    M09_AXI_bready : out STD_LOGIC;
+    M09_AXI_araddr : out STD_LOGIC_VECTOR ( 8 downto 0 );
+    M09_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M09_AXI_arvalid : out STD_LOGIC;
+    M09_AXI_arready : in STD_LOGIC;
+    M09_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    M09_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M09_AXI_rvalid : in STD_LOGIC;
+    M09_AXI_rready : out STD_LOGIC
   );
   end component design_1_axi_smc_0;
   component design_1_rst_ps7_0_100M_0 is
@@ -608,6 +628,31 @@ architecture STRUCTURE of design_1 is
     gpio_io_o : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component design_1_axi_gpio_0_7;
+  component design_1_axi_gpio_0_8 is
+  port (
+    s_axi_aclk : in STD_LOGIC;
+    s_axi_aresetn : in STD_LOGIC;
+    s_axi_awaddr : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    s_axi_awvalid : in STD_LOGIC;
+    s_axi_awready : out STD_LOGIC;
+    s_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axi_wvalid : in STD_LOGIC;
+    s_axi_wready : out STD_LOGIC;
+    s_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_bvalid : out STD_LOGIC;
+    s_axi_bready : in STD_LOGIC;
+    s_axi_araddr : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    s_axi_arvalid : in STD_LOGIC;
+    s_axi_arready : out STD_LOGIC;
+    s_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_rvalid : out STD_LOGIC;
+    s_axi_rready : in STD_LOGIC;
+    gpio_io_o : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component design_1_axi_gpio_0_8;
+  signal axi_gpio_rx_en_gpio_io_o : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axi_gpio_tx_data_gpio_io_o : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal axi_gpio_tx_start_gpio_io_o : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axi_smc_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 8 downto 0 );
@@ -763,6 +808,23 @@ architecture STRUCTURE of design_1 is
   signal axi_smc_M08_AXI_WREADY : STD_LOGIC;
   signal axi_smc_M08_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal axi_smc_M08_AXI_WVALID : STD_LOGIC;
+  signal axi_smc_M09_AXI_ARADDR : STD_LOGIC_VECTOR ( 8 downto 0 );
+  signal axi_smc_M09_AXI_ARREADY : STD_LOGIC;
+  signal axi_smc_M09_AXI_ARVALID : STD_LOGIC;
+  signal axi_smc_M09_AXI_AWADDR : STD_LOGIC_VECTOR ( 8 downto 0 );
+  signal axi_smc_M09_AXI_AWREADY : STD_LOGIC;
+  signal axi_smc_M09_AXI_AWVALID : STD_LOGIC;
+  signal axi_smc_M09_AXI_BREADY : STD_LOGIC;
+  signal axi_smc_M09_AXI_BRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal axi_smc_M09_AXI_BVALID : STD_LOGIC;
+  signal axi_smc_M09_AXI_RDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal axi_smc_M09_AXI_RREADY : STD_LOGIC;
+  signal axi_smc_M09_AXI_RRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal axi_smc_M09_AXI_RVALID : STD_LOGIC;
+  signal axi_smc_M09_AXI_WDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal axi_smc_M09_AXI_WREADY : STD_LOGIC;
+  signal axi_smc_M09_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
+  signal axi_smc_M09_AXI_WVALID : STD_LOGIC;
   signal processing_system7_0_FCLK_CLK0 : STD_LOGIC;
   signal processing_system7_0_FCLK_RESET0_N : STD_LOGIC;
   signal processing_system7_0_M_AXI_GP0_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -825,6 +887,8 @@ architecture STRUCTURE of design_1 is
   signal NLW_axi_smc_M07_AXI_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_axi_smc_M08_AXI_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_axi_smc_M08_AXI_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal NLW_axi_smc_M09_AXI_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal NLW_axi_smc_M09_AXI_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_processing_system7_0_TTC0_WAVE0_OUT_UNCONNECTED : STD_LOGIC;
   signal NLW_processing_system7_0_TTC0_WAVE1_OUT_UNCONNECTED : STD_LOGIC;
   signal NLW_processing_system7_0_TTC0_WAVE2_OUT_UNCONNECTED : STD_LOGIC;
@@ -950,6 +1014,29 @@ axi_gpio_rx_data: component design_1_axi_gpio_0_2
       s_axi_wready => axi_smc_M00_AXI_WREADY,
       s_axi_wstrb(3 downto 0) => axi_smc_M00_AXI_WSTRB(3 downto 0),
       s_axi_wvalid => axi_smc_M00_AXI_WVALID
+    );
+axi_gpio_rx_en: component design_1_axi_gpio_0_8
+     port map (
+      gpio_io_o(0) => axi_gpio_rx_en_gpio_io_o(0),
+      s_axi_aclk => processing_system7_0_FCLK_CLK0,
+      s_axi_araddr(8 downto 0) => axi_smc_M09_AXI_ARADDR(8 downto 0),
+      s_axi_aresetn => rst_ps7_0_100M_peripheral_aresetn(0),
+      s_axi_arready => axi_smc_M09_AXI_ARREADY,
+      s_axi_arvalid => axi_smc_M09_AXI_ARVALID,
+      s_axi_awaddr(8 downto 0) => axi_smc_M09_AXI_AWADDR(8 downto 0),
+      s_axi_awready => axi_smc_M09_AXI_AWREADY,
+      s_axi_awvalid => axi_smc_M09_AXI_AWVALID,
+      s_axi_bready => axi_smc_M09_AXI_BREADY,
+      s_axi_bresp(1 downto 0) => axi_smc_M09_AXI_BRESP(1 downto 0),
+      s_axi_bvalid => axi_smc_M09_AXI_BVALID,
+      s_axi_rdata(31 downto 0) => axi_smc_M09_AXI_RDATA(31 downto 0),
+      s_axi_rready => axi_smc_M09_AXI_RREADY,
+      s_axi_rresp(1 downto 0) => axi_smc_M09_AXI_RRESP(1 downto 0),
+      s_axi_rvalid => axi_smc_M09_AXI_RVALID,
+      s_axi_wdata(31 downto 0) => axi_smc_M09_AXI_WDATA(31 downto 0),
+      s_axi_wready => axi_smc_M09_AXI_WREADY,
+      s_axi_wstrb(3 downto 0) => axi_smc_M09_AXI_WSTRB(3 downto 0),
+      s_axi_wvalid => axi_smc_M09_AXI_WVALID
     );
 axi_gpio_rx_ready: component design_1_axi_gpio_0_3
      port map (
@@ -1239,6 +1326,25 @@ axi_smc: component design_1_axi_smc_0
       M08_AXI_wready => axi_smc_M08_AXI_WREADY,
       M08_AXI_wstrb(3 downto 0) => axi_smc_M08_AXI_WSTRB(3 downto 0),
       M08_AXI_wvalid => axi_smc_M08_AXI_WVALID,
+      M09_AXI_araddr(8 downto 0) => axi_smc_M09_AXI_ARADDR(8 downto 0),
+      M09_AXI_arprot(2 downto 0) => NLW_axi_smc_M09_AXI_arprot_UNCONNECTED(2 downto 0),
+      M09_AXI_arready => axi_smc_M09_AXI_ARREADY,
+      M09_AXI_arvalid => axi_smc_M09_AXI_ARVALID,
+      M09_AXI_awaddr(8 downto 0) => axi_smc_M09_AXI_AWADDR(8 downto 0),
+      M09_AXI_awprot(2 downto 0) => NLW_axi_smc_M09_AXI_awprot_UNCONNECTED(2 downto 0),
+      M09_AXI_awready => axi_smc_M09_AXI_AWREADY,
+      M09_AXI_awvalid => axi_smc_M09_AXI_AWVALID,
+      M09_AXI_bready => axi_smc_M09_AXI_BREADY,
+      M09_AXI_bresp(1 downto 0) => axi_smc_M09_AXI_BRESP(1 downto 0),
+      M09_AXI_bvalid => axi_smc_M09_AXI_BVALID,
+      M09_AXI_rdata(31 downto 0) => axi_smc_M09_AXI_RDATA(31 downto 0),
+      M09_AXI_rready => axi_smc_M09_AXI_RREADY,
+      M09_AXI_rresp(1 downto 0) => axi_smc_M09_AXI_RRESP(1 downto 0),
+      M09_AXI_rvalid => axi_smc_M09_AXI_RVALID,
+      M09_AXI_wdata(31 downto 0) => axi_smc_M09_AXI_WDATA(31 downto 0),
+      M09_AXI_wready => axi_smc_M09_AXI_WREADY,
+      M09_AXI_wstrb(3 downto 0) => axi_smc_M09_AXI_WSTRB(3 downto 0),
+      M09_AXI_wvalid => axi_smc_M09_AXI_WVALID,
       S00_AXI_araddr(31 downto 0) => processing_system7_0_M_AXI_GP0_ARADDR(31 downto 0),
       S00_AXI_arburst(1 downto 0) => processing_system7_0_M_AXI_GP0_ARBURST(1 downto 0),
       S00_AXI_arcache(3 downto 0) => processing_system7_0_M_AXI_GP0_ARCACHE(3 downto 0),
@@ -1369,6 +1475,7 @@ uart_axi_interface_0: component design_1_uart_axi_interface_0_0
      port map (
       clk => processing_system7_0_FCLK_CLK0,
       gpio_rx_data(7 downto 0) => uart_axi_interface_0_gpio_rx_data(7 downto 0),
+      gpio_rx_en => axi_gpio_rx_en_gpio_io_o(0),
       gpio_rx_ready => uart_axi_interface_0_gpio_rx_ready,
       gpio_tx_data(7 downto 0) => axi_gpio_tx_data_gpio_io_o(7 downto 0),
       gpio_tx_rdy => uart_axi_interface_0_gpio_tx_rdy,

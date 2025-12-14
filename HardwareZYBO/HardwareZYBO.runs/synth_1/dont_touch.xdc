@@ -45,4 +45,7 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_ax
 # IP: bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_gpio_0_7 || ORIG_REF_NAME==design_1_axi_gpio_0_7} -quiet] -quiet
 
+# IP: bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_gpio_0_8 || ORIG_REF_NAME==design_1_axi_gpio_0_8} -quiet] -quiet
+
 # XDC: d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/design_1_ooc.xdc

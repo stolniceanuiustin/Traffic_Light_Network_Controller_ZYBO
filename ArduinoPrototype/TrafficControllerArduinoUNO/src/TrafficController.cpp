@@ -1,9 +1,9 @@
-#include "IntersectionGraph.h"
 #include <stdio.h>
 #include <string.h>
-#include "TrafficController.h"
 #include <Arduino.h>
-
+#include "TrafficController.h"
+#include "IntersectionGraph.h"
+#include "HAL.h"
 // --- CONSTANTS ---
 #define PEDESTRIAN_COUNT_PER_BUTTON 5
 #define MAX_GREEN_TIME_MS 60000
@@ -11,15 +11,18 @@
 #define MIN_GREEN_TIME_MS 5000
 #define STARVATION_THRESHOLD_MS 99999
 uint16_t global_simulation_time = 0;
+
 // By convention, the pedestrian phase will be phase number 3.
 // Sorry for the hardcoding. Maybe i will fix this someday so pedestrian lanes are actually used!
 #define PEDESTRIAN_PHASE_IDX 3
 #define PEDESTRIAN_LANE_TL_WEST 17
+#define PEDESTRIAN_LANE_TL_EAST 16
 
 extern volatile uint16_t system_ticks;
-extern void uart_transmit_string(const uint8_t *msg, const size_t size);
 
-// --- SIMPLE TIME GETTER FOR ZYNQ COMPATIBILITY
+
+// --- Make sure we run on simulation time, not on real time, as we are running a simulaion
+// In real life, we would use real time(obviously :))) )
 uint16_t get_time_ms()
 {
     return global_simulation_time * 1000;
@@ -167,6 +170,7 @@ void send_traffic_state(Intersection *intr, char INT_CHAR_ID)
     uart_transmit_string((uint8_t *)status_buffer, buffer_idx);
 }
 
+bool update_time = false;
 void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
 {
     // Expected string
@@ -184,7 +188,9 @@ void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
         }
     }
 
-    global_simulation_time++; // Simulation sends this once per simulation step.
+    update_time = !update_time;
+    if(update_time == true)
+        global_simulation_time++; // Simulation sends this TWICE per simulation step!!.
 }
 
 void signal_pedestrian(Intersection *intr)

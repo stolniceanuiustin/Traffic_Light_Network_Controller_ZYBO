@@ -1,5 +1,6 @@
 verilog xil_defaultlib --include "E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" \
 "../../../bd/design_1/ip/design_1_processing_system7_0_0/sim/design_1_processing_system7_0_0.v" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/sim/bd_afc3.v" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_0/sim/bd_afc3_one_0.v" \
 
 sv xil_defaultlib --include "E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" \
@@ -90,9 +91,15 @@ sv xil_defaultlib --include "E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" -
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_86/sim/bd_afc3_m08wn_0.sv" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_87/sim/bd_afc3_m08bn_0.sv" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_88/sim/bd_afc3_m08e_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_89/sim/bd_afc3_m09s2a_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_90/sim/bd_afc3_m09arn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_91/sim/bd_afc3_m09rn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_92/sim/bd_afc3_m09awn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_93/sim/bd_afc3_m09wn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_94/sim/bd_afc3_m09bn_0.sv" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_95/sim/bd_afc3_m09e_0.sv" \
 
 verilog xil_defaultlib --include "E:/Xillinx/Vivado/2024.2/data/xilinx_vip/include" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/86fe/hdl" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../HardwareZYBO.gen/sources_1/bd/design_1/ipshared/0127/hdl/verilog" \
-"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/sim/bd_afc3.v" \
 "../../../bd/design_1/ip/design_1_axi_smc_0/sim/design_1_axi_smc_0.v" \
 
 verilog xil_defaultlib "glbl.v"

@@ -60,6 +60,7 @@ ENTITY design_1_uart_axi_interface_0_0 IS
     tx_pin : OUT STD_LOGIC;
     gpio_tx_data : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     gpio_tx_start : IN STD_LOGIC;
+    gpio_rx_en : IN STD_LOGIC;
     gpio_rx_data : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
     gpio_rx_ready : OUT STD_LOGIC;
     gpio_tx_rdy : OUT STD_LOGIC
@@ -76,6 +77,7 @@ ARCHITECTURE design_1_uart_axi_interface_0_0_arch OF design_1_uart_axi_interface
       tx_pin : OUT STD_LOGIC;
       gpio_tx_data : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
       gpio_tx_start : IN STD_LOGIC;
+      gpio_rx_en : IN STD_LOGIC;
       gpio_rx_data : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
       gpio_rx_ready : OUT STD_LOGIC;
       gpio_tx_rdy : OUT STD_LOGIC
@@ -95,6 +97,7 @@ BEGIN
       tx_pin => tx_pin,
       gpio_tx_data => gpio_tx_data,
       gpio_tx_start => gpio_tx_start,
+      gpio_rx_en => gpio_rx_en,
       gpio_rx_data => gpio_rx_data,
       gpio_rx_ready => gpio_rx_ready,
       gpio_tx_rdy => gpio_tx_rdy

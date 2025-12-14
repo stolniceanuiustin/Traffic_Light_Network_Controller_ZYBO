@@ -6,16 +6,6 @@
 
 (* BLOCK_STUB = "true" *)
 module design_1 (
-  tx,
-  rx,
-  vaux6n,
-  vaux6p,
-  vaux7n,
-  vaux7p,
-  vaux14n,
-  vaux14p,
-  vaux15n,
-  vauxp15_0,
   DDR_cas_n,
   DDR_cke,
   DDR_ck_n,
@@ -39,29 +29,19 @@ module design_1 (
   FIXED_IO_ps_porb,
   btns_4bits_tri_i,
   leds_4bits_tri_o,
-  sws_4bits_tri_i
+  sws_4bits_tri_i,
+  tx,
+  rx,
+  vaux6n,
+  vaux6p,
+  vaux7n,
+  vaux7p,
+  vaux14n,
+  vaux14p,
+  vaux15n,
+  vaux15p
 );
 
-  (* X_INTERFACE_IGNORE = "true" *)
-  output tx;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input rx;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux6n;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux6p;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux7n;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux7p;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux14n;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux14p;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vaux15n;
-  (* X_INTERFACE_IGNORE = "true" *)
-  input vauxp15_0;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR CAS_N" *)
   (* X_INTERFACE_MODE = "master DDR" *)
   (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR, CAN_DEBUG false, TIMEPERIOD_PS 1250, MEMORY_TYPE COMPONENTS, DATA_WIDTH 8, CS_ENABLED true, DATA_MASK_ENABLED true, SLOT Single, MEM_ADDR_MAP ROW_COLUMN_BANK, BURST_LENGTH 8, AXI_ARBITRATION_SCHEME TDM, CAS_LATENCY 11, CAS_WRITE_LATENCY 11" *)
@@ -117,6 +97,26 @@ module design_1 (
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 sws_4bits TRI_I" *)
   (* X_INTERFACE_MODE = "master sws_4bits" *)
   input [3:0]sws_4bits_tri_i;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output tx;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input rx;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux6n;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux6p;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux7n;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux7p;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux14n;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux14p;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux15n;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input vaux15p;
 
   // stub module has no contents
 

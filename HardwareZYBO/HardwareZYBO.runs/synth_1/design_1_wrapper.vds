@@ -3,8 +3,8 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Fri Dec 12 10:18:28 2025
-# Process ID         : 11692
+# Start of session at: Sun Dec 14 17:41:31 2025
+# Process ID         : 7988
 # Current directory  : D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1
 # Command line       : vivado.exe -log design_1_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_wrapper.tcl
 # Log file           : D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/design_1_wrapper.vds
@@ -19,14 +19,13 @@
 # Host memory        : 14702 MB
 # Swap memory        : 16793 MB
 # Total Virtual      : 31496 MB
-# Available Virtual  : 12346 MB
+# Available Virtual  : 10310 MB
 #-----------------------------------------------------------
 source design_1_wrapper.tcl -notrace
-create_project: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 404.898 ; gain = 103.574
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xillinx/Vivado/2024.2/data/ip'.
-add_files: Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 440.867 ; gain = 35.969
+add_files: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 444.898 ; gain = 41.379
 Command: read_checkpoint -auto_incremental -incremental D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/utils_1/imports/synth_1/uart_axi_interface.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/utils_1/imports/synth_1/uart_axi_interface.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -39,54 +38,56 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 9088
+INFO: [Synth 8-7075] Helper process launched with PID 23836
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1153.188 ; gain = 469.883
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 1156.238 ; gain = 469.672
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:54]
 INFO: [Synth 8-3491] module 'design_1' declared at 'd:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:15' bound to instance 'design_1_i' of component 'design_1' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:94]
 INFO: [Synth 8-638] synthesizing module 'design_1' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:58]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_5' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_5_stub.vhdl:6' bound to instance 'axi_gpio_btns' of component 'design_1_axi_gpio_0_5' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:885]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_5' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_5_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_7' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_7_stub.vhdl:6' bound to instance 'axi_gpio_leds' of component 'design_1_axi_gpio_0_7' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:908]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_7' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_7_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_2' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_2_stub.vhdl:6' bound to instance 'axi_gpio_rx_data' of component 'design_1_axi_gpio_0_2' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:931]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_2' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_2_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_3' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_3_stub.vhdl:6' bound to instance 'axi_gpio_rx_ready' of component 'design_1_axi_gpio_0_3' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:954]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_3' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_3_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_6' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_6_stub.vhdl:6' bound to instance 'axi_gpio_sws' of component 'design_1_axi_gpio_0_6' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:977]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_6' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_6_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_0_stub.vhdl:6' bound to instance 'axi_gpio_tx_data' of component 'design_1_axi_gpio_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1000]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_0_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_4' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_4_stub.vhdl:6' bound to instance 'axi_gpio_tx_rdy' of component 'design_1_axi_gpio_0_4' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1023]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_4' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_4_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_1' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_1_stub.vhdl:6' bound to instance 'axi_gpio_tx_start' of component 'design_1_axi_gpio_0_1' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1046]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_1' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_gpio_0_1_stub.vhdl:38]
-INFO: [Synth 8-3491] module 'design_1_axi_smc_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_smc_0_stub.vhdl:6' bound to instance 'axi_smc' of component 'design_1_axi_smc_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1069]
-INFO: [Synth 8-638] synthesizing module 'design_1_axi_smc_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_axi_smc_0_stub.vhdl:229]
-INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_processing_system7_0_0_stub.vhdl:6' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1283]
-INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_processing_system7_0_0_stub.vhdl:87]
-INFO: [Synth 8-3491] module 'design_1_rst_ps7_0_100M_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_rst_ps7_0_100M_0_stub.vhdl:6' bound to instance 'rst_ps7_0_100M' of component 'design_1_rst_ps7_0_100M_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1355]
-INFO: [Synth 8-638] synthesizing module 'design_1_rst_ps7_0_100M_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_rst_ps7_0_100M_0_stub.vhdl:28]
-INFO: [Synth 8-3491] module 'design_1_uart_axi_interface_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_uart_axi_interface_0_0_stub.vhdl:6' bound to instance 'uart_axi_interface_0' of component 'design_1_uart_axi_interface_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1368]
-INFO: [Synth 8-638] synthesizing module 'design_1_uart_axi_interface_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_uart_axi_interface_0_0_stub.vhdl:28]
-INFO: [Synth 8-3491] module 'design_1_xadc_wiz_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_xadc_wiz_0_0_stub.vhdl:6' bound to instance 'xadc_wiz_0' of component 'design_1_xadc_wiz_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1379]
-INFO: [Synth 8-638] synthesizing module 'design_1_xadc_wiz_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-11692-Iustin-PC/realtime/design_1_xadc_wiz_0_0_stub.vhdl:56]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_5' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_5_stub.vhdl:6' bound to instance 'axi_gpio_btns' of component 'design_1_axi_gpio_0_5' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:949]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_5' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_5_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_7' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_7_stub.vhdl:6' bound to instance 'axi_gpio_leds' of component 'design_1_axi_gpio_0_7' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:972]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_7' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_7_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_2' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_2_stub.vhdl:6' bound to instance 'axi_gpio_rx_data' of component 'design_1_axi_gpio_0_2' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:995]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_2' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_2_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_8' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_8_stub.vhdl:6' bound to instance 'axi_gpio_rx_en' of component 'design_1_axi_gpio_0_8' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1018]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_8' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_8_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_3' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_3_stub.vhdl:6' bound to instance 'axi_gpio_rx_ready' of component 'design_1_axi_gpio_0_3' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1041]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_3' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_3_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_6' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_6_stub.vhdl:6' bound to instance 'axi_gpio_sws' of component 'design_1_axi_gpio_0_6' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1064]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_6' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_6_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_0_stub.vhdl:6' bound to instance 'axi_gpio_tx_data' of component 'design_1_axi_gpio_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1087]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_0_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_4' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_4_stub.vhdl:6' bound to instance 'axi_gpio_tx_rdy' of component 'design_1_axi_gpio_0_4' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1110]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_4' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_4_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_gpio_0_1' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_1_stub.vhdl:6' bound to instance 'axi_gpio_tx_start' of component 'design_1_axi_gpio_0_1' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1133]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_gpio_0_1' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_gpio_0_1_stub.vhdl:38]
+INFO: [Synth 8-3491] module 'design_1_axi_smc_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_smc_0_stub.vhdl:6' bound to instance 'axi_smc' of component 'design_1_axi_smc_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1156]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_smc_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_axi_smc_0_stub.vhdl:248]
+INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_processing_system7_0_0_stub.vhdl:6' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1389]
+INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_processing_system7_0_0_stub.vhdl:87]
+INFO: [Synth 8-3491] module 'design_1_rst_ps7_0_100M_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_rst_ps7_0_100M_0_stub.vhdl:6' bound to instance 'rst_ps7_0_100M' of component 'design_1_rst_ps7_0_100M_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1461]
+INFO: [Synth 8-638] synthesizing module 'design_1_rst_ps7_0_100M_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_rst_ps7_0_100M_0_stub.vhdl:28]
+INFO: [Synth 8-3491] module 'design_1_uart_axi_interface_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_uart_axi_interface_0_0_stub.vhdl:6' bound to instance 'uart_axi_interface_0' of component 'design_1_uart_axi_interface_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1474]
+INFO: [Synth 8-638] synthesizing module 'design_1_uart_axi_interface_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_uart_axi_interface_0_0_stub.vhdl:29]
+INFO: [Synth 8-3491] module 'design_1_xadc_wiz_0_0' declared at 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_xadc_wiz_0_0_stub.vhdl:6' bound to instance 'xadc_wiz_0' of component 'design_1_xadc_wiz_0_0' [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:1486]
+INFO: [Synth 8-638] synthesizing module 'design_1_xadc_wiz_0_0' [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/.Xil/Vivado-7988-Iustin-PC/realtime/design_1_xadc_wiz_0_0_stub.vhdl:56]
 INFO: [Synth 8-256] done synthesizing module 'design_1' (0#1) [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/synth/design_1.vhd:58]
 INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (0#1) [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:54]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:10 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:11 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:10 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:11 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:10 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:11 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 1268.812 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1272.438 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -117,6 +118,8 @@ Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/desig
 Finished Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_6/design_1_axi_gpio_0_6/design_1_axi_gpio_0_6_in_context.xdc] for cell 'design_1_i/axi_gpio_sws'
 Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7_in_context.xdc] for cell 'design_1_i/axi_gpio_leds'
 Finished Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7/design_1_axi_gpio_0_7_in_context.xdc] for cell 'design_1_i/axi_gpio_leds'
+Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8/design_1_axi_gpio_0_1_in_context.xdc] for cell 'design_1_i/axi_gpio_rx_en'
+Finished Parsing XDC File [d:/ProiectSSC/HardwareZYBO/HardwareZYBO.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_0_8/design_1_axi_gpio_0_8/design_1_axi_gpio_0_1_in_context.xdc] for cell 'design_1_i/axi_gpio_rx_en'
 Parsing XDC File [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/constrs_1/imports/HardwareZYBO/zybo.xdc]
 WARNING: [Vivado 12-584] No ports matched 'clk'. [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/constrs_1/imports/HardwareZYBO/zybo.xdc:8]
 WARNING: [Vivado 12-584] No ports matched 'clk'. [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.srcs/constrs_1/imports/HardwareZYBO/zybo.xdc:9]
@@ -128,22 +131,22 @@ Parsing XDC File [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/dont_touc
 Finished Parsing XDC File [D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1268.812 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1272.438 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1268.812 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1272.438 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:20 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:21 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:20 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:22 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -422,11 +425,12 @@ Applied set_property KEEP_HIERARCHY = SOFT for design_1_i/rst_ps7_0_100M. (const
 Applied set_property KEEP_HIERARCHY = SOFT for design_1_i/axi_gpio_btns. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for design_1_i/axi_gpio_sws. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for design_1_i/axi_gpio_leds. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for design_1_i/axi_gpio_rx_en. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:20 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:22 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:20 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:22 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -449,25 +453,25 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:23 . Memory (MB): peak = 1268.812 ; gain = 585.508
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:26 . Memory (MB): peak = 1272.438 ; gain = 585.871
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1441.582 ; gain = 758.277
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:36 . Memory (MB): peak = 1445.043 ; gain = 758.477
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1441.730 ; gain = 758.426
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:36 . Memory (MB): peak = 1445.266 ; gain = 758.699
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1452.254 ; gain = 768.949
+Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:36 . Memory (MB): peak = 1456.125 ; gain = 769.559
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -485,37 +489,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished IO Insertion : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -528,16 +532,17 @@ Report BlackBoxes:
 |1     |design_1_axi_gpio_0_5           |         1|
 |2     |design_1_axi_gpio_0_7           |         1|
 |3     |design_1_axi_gpio_0_2           |         1|
-|4     |design_1_axi_gpio_0_3           |         1|
-|5     |design_1_axi_gpio_0_6           |         1|
-|6     |design_1_axi_gpio_0_0           |         1|
-|7     |design_1_axi_gpio_0_4           |         1|
-|8     |design_1_axi_gpio_0_1           |         1|
-|9     |design_1_axi_smc_0              |         1|
-|10    |design_1_processing_system7_0_0 |         1|
-|11    |design_1_rst_ps7_0_100M_0       |         1|
-|12    |design_1_uart_axi_interface_0_0 |         1|
-|13    |design_1_xadc_wiz_0_0           |         1|
+|4     |design_1_axi_gpio_0_8           |         1|
+|5     |design_1_axi_gpio_0_3           |         1|
+|6     |design_1_axi_gpio_0_6           |         1|
+|7     |design_1_axi_gpio_0_0           |         1|
+|8     |design_1_axi_gpio_0_4           |         1|
+|9     |design_1_axi_gpio_0_1           |         1|
+|10    |design_1_axi_smc_0              |         1|
+|11    |design_1_processing_system7_0_0 |         1|
+|12    |design_1_rst_ps7_0_100M_0       |         1|
+|13    |design_1_uart_axi_interface_0_0 |         1|
+|14    |design_1_xadc_wiz_0_0           |         1|
 +------+--------------------------------+----------+
 
 Report Cell Usage: 
@@ -552,34 +557,35 @@ Report Cell Usage:
 |6     |design_1_axi_gpio_0_5_bbox           |     1|
 |7     |design_1_axi_gpio_0_6_bbox           |     1|
 |8     |design_1_axi_gpio_0_7_bbox           |     1|
-|9     |design_1_axi_smc_0_bbox              |     1|
-|10    |design_1_processing_system7_0_0_bbox |     1|
-|11    |design_1_rst_ps7_0_100M_0_bbox       |     1|
-|12    |design_1_uart_axi_interface_0_0_bbox |     1|
-|13    |design_1_xadc_wiz_0_0_bbox           |     1|
-|14    |IBUF                                 |    17|
-|15    |OBUF                                 |     5|
+|9     |design_1_axi_gpio_0_8_bbox           |     1|
+|10    |design_1_axi_smc_0_bbox              |     1|
+|11    |design_1_processing_system7_0_0_bbox |     1|
+|12    |design_1_rst_ps7_0_100M_0_bbox       |     1|
+|13    |design_1_uart_axi_interface_0_0_bbox |     1|
+|14    |design_1_xadc_wiz_0_0_bbox           |     1|
+|15    |IBUF                                 |    17|
+|16    |OBUF                                 |     5|
 +------+-------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:31 . Memory (MB): peak = 1667.895 ; gain = 984.590
-Synthesis Optimization Complete : Time (s): cpu = 00:00:17 ; elapsed = 00:00:34 . Memory (MB): peak = 1667.895 ; gain = 984.590
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:42 . Memory (MB): peak = 1671.844 ; gain = 985.277
+Synthesis Optimization Complete : Time (s): cpu = 00:00:17 ; elapsed = 00:00:45 . Memory (MB): peak = 1671.844 ; gain = 985.277
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1677.004 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.036 . Memory (MB): peak = 1671.844 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1680.645 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1671.844 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: 2e7819c8
+Synth Design complete | Checksum: 7f3446f5
 INFO: [Common 17-83] Releasing license: Synthesis
-53 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+55 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:19 ; elapsed = 00:01:00 . Memory (MB): peak = 1680.645 ; gain = 1211.105
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1680.645 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:58 . Memory (MB): peak = 1671.844 ; gain = 1199.383
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1671.844 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/ProiectSSC/HardwareZYBO/HardwareZYBO.runs/synth_1/design_1_wrapper.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Dec 12 10:19:52 2025...
+INFO: [Common 17-206] Exiting Vivado at Sun Dec 14 17:42:44 2025...

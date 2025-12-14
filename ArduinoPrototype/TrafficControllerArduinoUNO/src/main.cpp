@@ -4,6 +4,7 @@
 #include "IntersectionWest.h"
 #include "IntersectionEast.h"
 #include "TrafficController.h"
+#include "HAL.h"
 // we will recieve an array that will look like this:
 // 0xFF(traffic_val_lane1)(traffic_val_lane2)(traffic_val_lane3)...0xFF
 // 0xFF and 0 are reserved, so we can't use them
@@ -32,13 +33,6 @@ volatile bool message_complete = false;
 Intersection tl_west;
 Intersection tl_east;
 
-void uart_transmit_string(const uint8_t *msg, const size_t size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        Serial.write(msg[i]);
-    }
-}
 
 void setup()
 {
@@ -46,6 +40,7 @@ void setup()
     delay(2000);
     memset(traffic_string, 0, 64);
     pinMode(4, INPUT_PULLUP);
+    pinMode(5, INPUT_PULLUP);
     init_tl_west(&tl_west);
     init_tl_east(&tl_east);
 }
@@ -73,12 +68,17 @@ void loop()
         message_complete = 0;
         current_state = IDLE;
     }
-    if (digitalRead(4) == 0)
+    
+    if (ped_btn_is_pressed(TL_WEST))
     {
         signal_pedestrian(&tl_west);
         // Serial.println("BUTTON PRESSED");
     }
+    if(ped_btn_is_pressed(TL_EAST)){
+        signal_pedestrian(&tl_east);
+    }
 }
+
 
 void serialEvent()
 {
