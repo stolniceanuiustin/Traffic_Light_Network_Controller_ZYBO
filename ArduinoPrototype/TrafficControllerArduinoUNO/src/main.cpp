@@ -56,7 +56,7 @@ void loop()
             parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
 
             run_traffic_controller(&tl_west, PEDESTRIAN_LANE_TL_WEST);
-            send_traffic_state(&tl_west, 'W', (char)2);
+            send_traffic_state(&tl_west, 'W', (char)127);
         }
         else
         {

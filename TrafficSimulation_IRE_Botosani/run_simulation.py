@@ -228,28 +228,36 @@ def generate_cars_west(pot_value):
     if pot_value <= 0:
         return
 
-    spawn_count = min(pot_value, 20)
+    # Map 0-127 to a probability 0.0 - 1.0
+    # Example: 2 / 127 = 0.015 (1.5% chance per step)
+    spawn_probability = pot_value / 127.0
+    
+    # Only spawn if the random roll is less than the probability
+    if random.random() > spawn_probability:
+        return
 
-    for _ in range(spawn_count):
-        veh_id = f"west_car_{vehicle_counter}"
-        vehicle_counter += 1
+    # If we pass the check, spawn ONE car
+    veh_id = f"west_car_{vehicle_counter}"
+    vehicle_counter += 1
 
-        route_edges = WEST_ROUTES[vehicle_counter % len(WEST_ROUTES)]
-        route_id = f"route_{veh_id}"
+    route_edges = WEST_ROUTES[vehicle_counter % len(WEST_ROUTES)]
+    route_id = f"route_{veh_id}"
 
-        try:
-            traci.route.add(route_id, route_edges)
+    try:
+        traci.route.add(route_id, route_edges)
+        traci.vehicle.add(
+            vehID=veh_id,
+            routeID=route_id,
+            typeID=VEH_TYPE,
+            departLane="best",
+            departSpeed="max"
+        )
+        if DEBUG:
+            print(f"[GEN] Spawned {veh_id} (Pot: {pot_value})")
 
-            traci.vehicle.add(
-                vehID=veh_id,
-                routeID=route_id,
-                typeID=VEH_TYPE,
-                departLane="best",   # ✅ SAFE
-                departSpeed="max"
-            )
+    except traci.TraCIException as e:
+        print(f"[GEN WEST ERROR] {veh_id}: {e}")
 
-        except traci.TraCIException as e:
-            print(f"[GEN WEST ERROR] {veh_id}: {e}")
 #this works only for traffic light west for now
 def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
     """Converts the Hardware Status Dictionary to a SUMO phase string"""
