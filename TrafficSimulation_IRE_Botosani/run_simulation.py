@@ -4,6 +4,7 @@ import serial
 import time
 import struct
 import binascii
+import random 
 
 # ==== SUMO CONFIGURATION ==== #
 SUMO_TOOLS = r"C:\Program Files (x86)\Eclipse\Sumo\tools"
@@ -52,7 +53,7 @@ TLWest_Lane_Dictionary = {
 }
 
 TLEast_Lane_Dictionary = {
-    0: "N_P1_Upstream_1", # This is a typo in netedit, this is actually downstream
+    0: "N_P1_Upstream_1", 
     1: "N_P1_Upstream_2",
     2: "N_P2_Upstream_4",
     3: "N_P2_Upstream_3",
@@ -72,12 +73,9 @@ TLEast_Lane_Dictionary = {
 
 TL_West_Downstream_Lanes = [0,1,5,6,11,12,13]
 TL_East_Downstream_Lanes = [12,13,6,7,8,0,1]
-# Mapping SUMO Signal Index (0-13) -> Hardware Lane ID
-# #l16 l15 l14 l7 l7 l9 l10 l10 l4 l3 l2 l2 ped1 ped2
-# Note: Peds are handled separately at the end of the loop. Pedestrians are not simulated by SUMO but by buttons
-TL_West_sumo_to_hw_index = [16, 15, 14, 7, 7, 9, 10, 10, 4, 3, 2, 2]
 
-#l2 l3 l4 l5 l5 l14 l14 l15 l15 
+# Mapping SUMO Signal Index -> Hardware Lane ID
+TL_West_sumo_to_hw_index = [16, 15, 14, 7, 7, 9, 10, 10, 4, 3, 2, 2]
 TL_East_sumo_to_hw_index = [2, 3, 4, 5, 5, 14, 14, 15, 15, 11, 10, 9]
 
 # ==== HELPER FUNCTIONS ==== #
@@ -108,90 +106,84 @@ Lane_Cnt_Dict = {
     "TL_East": (16, 2)
 }
 
-def receive_traffic_state(ser):
-    """ Reads a length-prefixed packet from the Arduino. The format is the following:
-        (package_length)(W\E - based on what int. we want to control)(traffic_data)(W\E)
+def receive_traffic_state(ser, expected_id):
+    """ 
+    Reads a length-prefixed packet. Checks ID to prevent crashes.
+    Format: [Len][ID][Statuses...][Pot][ID]
     """
     try:
-        # Read the Length Byte (1 byte)
+        # 1. Read Length
         length_byte = ser.read(1)
-        
-        if not length_byte:
-            return None # Timeout
+        if not length_byte: return None 
             
         packet_size = int.from_bytes(length_byte, byteorder='big')
         
         # Sanity Check
         if packet_size < 5 or packet_size > 64:
-             print(f" [RX] Warning: Invalid packet size ({packet_size}). Flushing.")
+             # print(f" [RX] Warning: Invalid packet size ({packet_size}). Flushing.")
              ser.reset_input_buffer()
              return None
 
-        # Read exactly 'packet_size' bytes
+        # 2. Read Payload
         data = ser.read(packet_size)
         
+        # Check if we got full data to avoid NameError/IndexError
         if len(data) != packet_size:
-            print(f" [RX] Error: Expected {packet_size} bytes, got {len(data)}")
+            # print(f" [RX] Error: Expected {packet_size} bytes, got {len(data)}")
             return None
 
-        # Decode
-        try:
-            received_string = data.decode('ascii')
-        except UnicodeDecodeError:
-            print(f" [RX] Error: Non-ASCII data: {data}")
+        # 3. Validation: Check Start ID against what we expected
+        start_id_char = data[0:1].decode('ascii')
+        end_id_char = data[packet_size - 1 : packet_size].decode('ascii')
+
+        if start_id_char != expected_id:
+            # This is the "Garbage Packet" filter. 
+            # If we wanted 'W' but got 'E', return None so we don't crash.
             return None
 
-        # Validate Framing
-        if received_string[0] not in ['W', 'E']  or received_string[-1] not in ['W', 'E']:
-             print(f" [RX] Error: Malformed payload: {received_string}")
-             return None
+        # 4. Extract Data
+        # Pot Value is at Index N-2
+        pot_value = int(data[packet_size - 2])
+        
+        # Status String is from Index 1 to N-2
+        status_string = data[1 : packet_size - 2].decode('ascii')
 
-        # 5. Parse Statuses
-        if received_string[0] == 'W' and received_string[-1] == 'W':
+        # 5. Parse Statuses based on ID
+        if start_id_char == 'W':
             car_lane_cnt = Lane_Cnt_Dict["TL_West"][0]
             ped_lane_cnt = Lane_Cnt_Dict["TL_West"][1]
-            start_cars = 1
-            end_cars = 1 + car_lane_cnt 
-            start_peds = end_cars 
-            end_peds = start_peds + ped_lane_cnt
-            statuses = {
-                "Car_Lights": received_string[start_cars : end_cars], 
-                "Ped_Lights": received_string[start_peds : end_peds], 
-                "Raw_String": received_string 
-            }
-            return statuses
-
-        elif received_string[0] == 'E' and received_string[-1] == 'E':
+        elif start_id_char == 'E':
             car_lane_cnt = Lane_Cnt_Dict["TL_East"][0]
             ped_lane_cnt = Lane_Cnt_Dict["TL_East"][1]
-            start_cars = 1
-            end_cars = 1 + car_lane_cnt 
-            start_peds = end_cars 
-            end_peds = start_peds + ped_lane_cnt
-            statuses = {
-                "Car_Lights": received_string[start_cars : end_cars], 
-                "Ped_Lights": received_string[start_peds : end_peds], 
-                "Raw_String": received_string 
-            }
-            return statuses
+        
+        # Safety Check for string slicing
+        if len(status_string) < (car_lane_cnt + ped_lane_cnt):
+             return None
+
+        statuses = {
+            "Car_Lights": status_string[0 : car_lane_cnt], 
+            "Ped_Lights": status_string[car_lane_cnt : car_lane_cnt + ped_lane_cnt], 
+            "Pot_Value": pot_value,
+            "Raw_String": data.hex() 
+        }
+        return statuses
 
     except Exception as e:
-        print(f" [RX] General error: {e}")
+        # print(f" [RX] General error: {e}")
         return None
 
 def get_traffic_values(Traffic_Values, Lane_Dictionary):
     """Refreshes the Traffic_Values list with current SUMO data"""
-    Traffic_Values.clear() # Clear previous step data
+    Traffic_Values.clear() 
     
     for i in range(len(Lane_Dictionary)):
         lane_id = Lane_Dictionary.get(i)
         if lane_id:
             try:
-                # count = 
                 val_to_send = 0
                 if i in TL_West_Downstream_Lanes:
-                     occupancy_fraction = traci.lane.getLastStepOccupancy(lane_id)
-                     if(occupancy_fraction >= 90):
+                      occupancy_fraction = traci.lane.getLastStepOccupancy(lane_id)
+                      if(occupancy_fraction >= 90):
                         val_to_send = occupancy_fraction / 10
                 else:
                     val_to_send = traci.lane.getLastStepVehicleNumber(lane_id)
@@ -202,7 +194,62 @@ def get_traffic_values(Traffic_Values, Lane_Dictionary):
         else:
             Traffic_Values.append(0)
 
+WEST_ROUTES = [
+    ["S_P2_UPSTREAM",
+     "W_P0P2_Downstream_E_P0P1_Upstream",
+     "N_P1_Upstream"],
 
+    ["S_P2_UPSTREAM",
+     "W_P0P1P2_Downstream",
+     "E1"],
+
+    ["S_P2_UPSTREAM",
+     "W_P0P2_Downstream_E_P0P1_Upstream",
+     "E_P0P2_Downstream",
+     "E6"],
+
+    ["S_P2_UPSTREAM",
+     "W_P0P1P2_Downstream",
+     "E2"],
+]
+
+WEST_LANES = [
+    "S_P2_UPSTREAM_1",
+    "S_P2_UPSTREAM_2",
+    "S_P2_UPSTREAM_3",
+    "S_P2_UPSTREAM_4",
+]
+
+VEH_TYPE = "car"
+vehicle_counter = 0
+def generate_cars_west(pot_value):
+    global vehicle_counter
+
+    if pot_value <= 0:
+        return
+
+    spawn_count = min(pot_value, 20)
+
+    for _ in range(spawn_count):
+        veh_id = f"west_car_{vehicle_counter}"
+        vehicle_counter += 1
+
+        route_edges = WEST_ROUTES[vehicle_counter % len(WEST_ROUTES)]
+        route_id = f"route_{veh_id}"
+
+        try:
+            traci.route.add(route_id, route_edges)
+
+            traci.vehicle.add(
+                vehID=veh_id,
+                routeID=route_id,
+                typeID=VEH_TYPE,
+                departLane="best",   # ✅ SAFE
+                departSpeed="max"
+            )
+
+        except traci.TraCIException as e:
+            print(f"[GEN WEST ERROR] {veh_id}: {e}")
 #this works only for traffic light west for now
 def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
     """Converts the Hardware Status Dictionary to a SUMO phase string"""
@@ -260,31 +307,36 @@ def main():
             start_time = time.time()
             traci.simulationStep()
 
-            #WEST Intersection first
+            # ================= WEST INTERSECTION =================
             get_traffic_values(TL_WEST_TRAFFIC_VALUES, TLWest_Lane_Dictionary)
 
-            # ==== DEBUG PRINTS ======
             if(DEBUG):
                 print(f"\n[Step {step}] TX Traffic Counts WEST (Total {len(TL_WEST_TRAFFIC_VALUES)} lanes):")
                 print(f"    Raw Counts: {TL_WEST_TRAFFIC_VALUES}")
             
-            # Send data to Traffic Control Device (Arduino in this case)
+            # 1. FLUSH BUFFER (Fixes sync issues)
+            ser.reset_input_buffer()
+
+            # Send data to Traffic Control Device
             packet = build_transmission_packet(TL_WEST_TRAFFIC_VALUES)
             send_data_chunks(ser, packet)
 
-            # Wait for response from traffic Control Device
-            status_data_west = receive_traffic_state(ser)
+            # Wait for response (Requesting 'W')
+            status_data_west = receive_traffic_state(ser, 'W')
 
             # Change Phase
             if status_data_west:
                 raw_str = status_data_west["Raw_String"]
                 cars = status_data_west["Car_Lights"]
                 peds = status_data_west["Ped_Lights"]
-
+                pot = status_data_west["Pot_Value"]
+        
                 if(DEBUG):
                     print(f"[Step {step}] RX Success: {raw_str}")
-                    print(f"    Cars: {cars} | Peds: {peds}")
-                
+                    print(f"    Cars: {cars} | Peds: {peds} | Pot: {pot}")
+
+                if(pot > 0):
+                    generate_cars_west(pot)        
                 new_phase = parse_status_to_sumo_phase(status_data_west, TL_West_sumo_to_hw_index, 2)
 
                 if(DEBUG):
@@ -296,30 +348,33 @@ def main():
                     print(f"Step {step}: No update received.")
                 pass
 
-            # EAST Intersection Now
+            # ================= EAST INTERSECTION =================
             get_traffic_values(TL_EAST_TRAFFIC_VALUES, TLEast_Lane_Dictionary)
 
-            # ==== DEBUG PRINTS ======
             if(DEBUG):
-                print(f"\n[Step {step}] TX Traffic Counts WEST (Total {len(TL_EAST_TRAFFIC_VALUES)} lanes):")
+                print(f"\n[Step {step}] TX Traffic Counts EAST (Total {len(TL_EAST_TRAFFIC_VALUES)} lanes):")
                 print(f"    Raw Counts: {TL_EAST_TRAFFIC_VALUES}")
             
-            # Send data to Traffic Control Device (Arduino in this case)
+            # 1. FLUSH BUFFER AGAIN
+            ser.reset_input_buffer()
+
+            # Send data to Traffic Control Device
             packet = build_transmission_packet(TL_EAST_TRAFFIC_VALUES)
             send_data_chunks(ser, packet)
 
-            # Wait for response from traffic Control Device
-            status_data_east = receive_traffic_state(ser)
+            # Wait for response (Requesting 'E')
+            status_data_east = receive_traffic_state(ser, 'E')
 
             # Change Phase
             if status_data_east:
                 raw_str = status_data_east["Raw_String"]
                 cars = status_data_east["Car_Lights"]
                 peds = status_data_east["Ped_Lights"]
+                pot = status_data_east["Pot_Value"]
 
                 if(DEBUG):
                     print(f"[Step {step}] RX Success: {raw_str}")
-                    print(f"    Cars: {cars} | Peds: {peds}")
+                    print(f"    Cars: {cars} | Peds: {peds} | Pot: {pot}")
                 
                 new_phase = parse_status_to_sumo_phase(status_data_east, TL_East_sumo_to_hw_index, 2)
 
@@ -331,6 +386,7 @@ def main():
                 if(DEBUG):
                     print(f"Step {step}: No update received.")
                 pass
+
             step += 1
             
             # Ensure the loop doesn't run faster than 0.3s

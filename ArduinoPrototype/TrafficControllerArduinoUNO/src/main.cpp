@@ -55,14 +55,14 @@ void loop()
             // uart_transmit_string(traffic_string, traffic_string_idx);
             parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
 
-            run_traffic_controller(&tl_west);
-            send_traffic_state(&tl_west, 'W');
+            run_traffic_controller(&tl_west, PEDESTRIAN_LANE_TL_WEST);
+            send_traffic_state(&tl_west, 'W', (char)2);
         }
         else
         {
             parse_traffic_values(&tl_east, traffic_string, traffic_string_idx);
-            run_traffic_controller(&tl_east);
-            send_traffic_state(&tl_east, 'E');
+            run_traffic_controller(&tl_east, PEDESTRIAN_LANE_TL_EAST);
+            send_traffic_state(&tl_east, 'E', 0);
         }
         traffic_string_idx = 0;
         message_complete = 0;
@@ -71,12 +71,14 @@ void loop()
     
     if (ped_btn_is_pressed(TL_WEST))
     {
-        signal_pedestrian(&tl_west);
+        signal_pedestrian(&tl_west, PEDESTRIAN_LANE_TL_WEST);
         // Serial.println("BUTTON PRESSED");
     }
     if(ped_btn_is_pressed(TL_EAST)){
-        signal_pedestrian(&tl_east);
+        signal_pedestrian(&tl_east, PEDESTRIAN_LANE_TL_EAST);
+        // Serial.println("BBUTTON PRESSED");
     }
+
 }
 
 

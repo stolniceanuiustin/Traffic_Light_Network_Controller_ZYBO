@@ -8,7 +8,7 @@
 #define MAX_LANE_CNT 20
 #define MAX_CONNECTION_CNT 20
 #define MAX_PHASE_CNT 5
-#define MAX_CONNS_PER_PHASE 10
+#define MAX_CONNS_PER_PHASE 15
 
 
 typedef enum

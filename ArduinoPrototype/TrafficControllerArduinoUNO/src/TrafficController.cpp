@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-#include <Arduino.h>
 #include "TrafficController.h"
 #include "IntersectionGraph.h"
 #include "HAL.h"
 // --- CONSTANTS ---
-#define PEDESTRIAN_COUNT_PER_BUTTON 5
+#define PEDESTRIAN_COUNT_PER_BUTTON 100
 #define MAX_GREEN_TIME_MS 60000
 #define YELLOW_DURATION_MS 2000
 #define MIN_GREEN_TIME_MS 5000
@@ -15,8 +14,7 @@ uint16_t global_simulation_time = 0;
 // By convention, the pedestrian phase will be phase number 3.
 // Sorry for the hardcoding. Maybe i will fix this someday so pedestrian lanes are actually used!
 #define PEDESTRIAN_PHASE_IDX 3
-#define PEDESTRIAN_LANE_TL_WEST 17
-#define PEDESTRIAN_LANE_TL_EAST 16
+
 
 extern volatile uint16_t system_ticks;
 
@@ -37,16 +35,28 @@ int calculate_pressure(Intersection *intr, int phase_idx)
     for (int i = 0; i < p->connection_count; i++)
     {
         int conn = p->connection_indices[i];
-        pressure += (intr->lanes[intr->connections[conn].source_lane_idx].car_count -
-                     intr->lanes[intr->connections[conn].target_lane_idx].car_count);
+        int src_val = (int)intr->lanes[intr->connections[conn].source_lane_idx].car_count;
+        int tgt_val = (int)intr->lanes[intr->connections[conn].target_lane_idx].car_count;
+        pressure += (src_val - tgt_val);
     }
     return pressure;
 }
 
 int determine_next_phase(Intersection *intr)
 {
+    //return PEDESTRIAN_PHASE_IDX;
     uint64_t now = get_time_ms();
     int current_idx = intr->current_phase_idx;
+
+
+    int ped_pressure = calculate_pressure(intr, PEDESTRIAN_PHASE_IDX);
+    if (ped_pressure > 0 && current_idx != PEDESTRIAN_PHASE_IDX)
+    {
+        if (now - intr->phase_start_time > MIN_GREEN_TIME_MS) 
+        {
+            return PEDESTRIAN_PHASE_IDX; 
+        }
+    }
 
     // === STARVATION LOGIC ===
     // If a phase has 0 pressure, it is NOT affected by starvation.
@@ -60,7 +70,7 @@ int determine_next_phase(Intersection *intr)
 
         int p = calculate_pressure(intr, i);
 
-        if (p > 0)
+        if (p >= 0)
         {
             uint64_t wait = now - intr->phase_last_serviced[i];
             if (wait > STARVATION_THRESHOLD_MS && wait > max_wait)
@@ -120,7 +130,7 @@ void update_lane_status(Intersection *intr, char global_status)
     }
 }
 
-void send_traffic_state(Intersection *intr, char INT_CHAR_ID)
+void send_traffic_state(Intersection *intr, char INT_CHAR_ID, char potentiometer_value)
 {
     char status_buffer[2 + intr->lane_cnt + 2 + 1];
     uint8_t buffer_idx = 1;
@@ -160,8 +170,7 @@ void send_traffic_state(Intersection *intr, char INT_CHAR_ID)
     status_buffer[buffer_idx++] = ped_status;
 
     //AFTER ALL LANES WE SEND THE intersection id and potentiometer value(to dirrectly influence traffic values!)
-    status_buffer[buffer_idx++] = (char)'4';
-    status_buffer[buffer_idx++] = (char)'E';
+    status_buffer[buffer_idx++] = potentiometer_value;
     status_buffer[buffer_idx++] = INT_CHAR_ID;
 
     uint8_t payload_size = buffer_idx - 1;
@@ -171,7 +180,7 @@ void send_traffic_state(Intersection *intr, char INT_CHAR_ID)
 }
 
 bool update_time = false;
-void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
+void parse_traffic_values(Intersection *intr, uint8_t *string, uint8_t size)
 {
     // Expected string
     // string[0] = lane 0 count
@@ -180,6 +189,8 @@ void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
     for (uint8_t i = 0; i < size; i++)
     {
         int lane_id = i;
+        if(i == PEDESTRIAN_LANE_TL_EAST)
+            continue;
         uint8_t recieved_val = (uint8_t)string[i];
         int idx = get_lane_index_by_id(intr, lane_id);
         if (idx != -1)
@@ -193,12 +204,13 @@ void parse_traffic_values(Intersection *intr, uint8_t *string, size_t size)
         global_simulation_time++; // Simulation sends this TWICE per simulation step!!.
 }
 
-void signal_pedestrian(Intersection *intr)
+void signal_pedestrian(Intersection *intr, int ped_lane_id)
 {
-    intr->lanes[get_lane_index_by_id(intr, PEDESTRIAN_LANE_TL_WEST)].car_count = PEDESTRIAN_COUNT_PER_BUTTON; 
+    intr->lanes[get_lane_index_by_id(intr, ped_lane_id)].car_count = PEDESTRIAN_COUNT_PER_BUTTON; 
+    intr->lanes[get_lane_index_by_id(intr, ped_lane_id+1)].car_count = 0;
 }
 
-void run_traffic_controller(Intersection *intr)
+void run_traffic_controller(Intersection *intr, int ped_lane_id)
 {
     uint16_t now = get_time_ms();
     if (intr->phase_start_time == 0)
@@ -231,7 +243,7 @@ void run_traffic_controller(Intersection *intr)
             if (intr->next_phase_idx == PEDESTRIAN_PHASE_IDX)
             {
                 // TODO REFACTOR THIS SO ITS NOT HARDCODED
-                int ped_lane_idx = get_lane_index_by_id(intr, PEDESTRIAN_LANE_TL_WEST);
+                int ped_lane_idx = get_lane_index_by_id(intr, ped_lane_id);
                 if (ped_lane_idx != -1)
                 {
                     intr->lanes[ped_lane_idx].car_count = 0;
