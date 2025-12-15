@@ -22,9 +22,12 @@ DEBUG = True
 FREQUENCY_CONTROL = False
 
 # ==== SERIAL CONFIGURATION ==== 
-SERIAL_PORT = 'COM21' 
+SERIAL_PORT = 'COM45' 
 BAUD_RATE = 9600
-CHUNK_SIZE = 8
+
+CHUNK_SIZE = 3
+# -------------------------------------
+
 START_STOP_DELIMITER = 0xFF 
 PADDING_BYTE = 0x00
 RECEIVE_TIMEOUT = 5  
@@ -86,20 +89,27 @@ def build_transmission_packet(values):
     full_message_body = [START_STOP_DELIMITER] + encoded_data + [START_STOP_DELIMITER]
 
     message_length = len(full_message_body)
+    
+    # --- CHANGE 2: Dynamic Padding Calculation ---
+    # This logic automatically adjusts to CHUNK_SIZE = 7
+    # Example: If msg is 19 bytes, 19 % 7 = 5. Needed = 7 - 5 = 2. Total = 21 (3 chunks).
     padding_needed = (CHUNK_SIZE - (message_length % CHUNK_SIZE)) % CHUNK_SIZE
     padded_message = full_message_body + [PADDING_BYTE] * padding_needed
     
     bytes_to_send = bytes(padded_message)
     if(DEBUG):
-        print(f" [TX] Message Size: {message_length} bytes.")
+        print(f" [TX] Original Size: {message_length} bytes. Padded to: {len(bytes_to_send)} (Chunks of {CHUNK_SIZE})")
     return bytes_to_send
 
 def send_data_chunks(ser, bytes_to_send):
-    """Sends the prepared byte sequence in 8-byte chunks."""
+    """Sends the prepared byte sequence in CHUNK_SIZE byte chunks."""
+    # --- CHANGE 3: Loop Logic uses new CHUNK_SIZE ---
     for i in range(0, len(bytes_to_send), CHUNK_SIZE):
         chunk = bytes_to_send[i:i + CHUNK_SIZE]
         ser.write(chunk)
-        time.sleep(0.005) # Tiny delay for stability
+        # You might be able to reduce this sleep slightly since packets are smaller,
+        # but 0.005 is safe. If garbage persists, INCREASE this to 0.010.
+        time.sleep(0.005) 
 
 Lane_Cnt_Dict = {
     "TL_West": (17, 2),

@@ -28,11 +28,14 @@ Intersection tl_west;
 Intersection tl_east;
 
 void setup() {
+  xil_printf("---- Max Pressure Traffic Contorller ----\r\n");
   init_gpio();
+  xil_printf("---- Max Pressure Traffic Contorller ----\r\n");
   init_xadc();
+
   init_tl_west(&tl_west);
   init_tl_east(&tl_east);
-  xil_printf("---- Max Pressure Traffic Contorller ----\r\n");
+  
 }
 
 void my_serial_event() {
@@ -109,6 +112,7 @@ void loop() {
 }
 
 int main() {
+    xil_printf("TEST");
   setup();
   for(;;)
   {

@@ -48,9 +48,10 @@ int init_gpio() {
   if (Status != XST_SUCCESS)
     return XST_FAILURE;
   Status = XGpio_Initialize(&GpioRxEn, XPAR_AXI_GPIO_RX_EN_BASEADDR);
-  XGpio_SetDataDirection(&GpioRxEn, 1, 0x00);
   if (Status != XST_SUCCESS)
     return XST_FAILURE;
+  XGpio_SetDataDirection(&GpioRxEn, 1, 0x00);
+  
   Status = XGpio_Initialize(&GpioBtns, XPAR_AXI_GPIO_BTNS_BASEADDR);
   if (Status != XST_SUCCESS)
     return XST_FAILURE;
