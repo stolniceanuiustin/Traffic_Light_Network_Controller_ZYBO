@@ -10,4 +10,4 @@ You can model virtually any interseciton layout in the PS, given you know a litt
 
 
 ## CUSTOM UART PROTOCOL   
-I designed, in the PL part, a custom UART interface. The recieving end features a 8 byte circual buffer and runs at a fixed UART of 9600. I plan to make the UART rate variable by changing something in PS(after i make this work). The implementation will be available in the documentation.
+I designed, in the PL part, a custom UART interface. The recieving end features a 64 byte circual buffer and runs at a fixed UART of 9600. I plan to make the UART rate variable by changing something in PS(after i make this work). The implementation will be available in the documentation.
