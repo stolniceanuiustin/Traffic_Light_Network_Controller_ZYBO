@@ -24,9 +24,7 @@ FREQUENCY_CONTROL = False
 # ==== SERIAL CONFIGURATION ==== 
 SERIAL_PORT = 'COM45' 
 BAUD_RATE = 9600
-
 CHUNK_SIZE = 3
-# -------------------------------------
 
 START_STOP_DELIMITER = 0xFF 
 PADDING_BYTE = 0x00
@@ -90,9 +88,6 @@ def build_transmission_packet(values):
 
     message_length = len(full_message_body)
     
-    # --- CHANGE 2: Dynamic Padding Calculation ---
-    # This logic automatically adjusts to CHUNK_SIZE = 7
-    # Example: If msg is 19 bytes, 19 % 7 = 5. Needed = 7 - 5 = 2. Total = 21 (3 chunks).
     padding_needed = (CHUNK_SIZE - (message_length % CHUNK_SIZE)) % CHUNK_SIZE
     padded_message = full_message_body + [PADDING_BYTE] * padding_needed
     
@@ -103,12 +98,10 @@ def build_transmission_packet(values):
 
 def send_data_chunks(ser, bytes_to_send):
     """Sends the prepared byte sequence in CHUNK_SIZE byte chunks."""
-    # --- CHANGE 3: Loop Logic uses new CHUNK_SIZE ---
     for i in range(0, len(bytes_to_send), CHUNK_SIZE):
         chunk = bytes_to_send[i:i + CHUNK_SIZE]
         ser.write(chunk)
-        # You might be able to reduce this sleep slightly since packets are smaller,
-        # but 0.005 is safe. If garbage persists, INCREASE this to 0.010.
+        # We need this sleep because the custom UART interface may be experiencing some slight clock drifting, so we do this to avoid garbage
         time.sleep(0.005) 
 
 Lane_Cnt_Dict = {
@@ -147,7 +140,6 @@ def receive_traffic_state(ser, expected_id):
         end_id_char = data[packet_size - 1 : packet_size].decode('ascii')
 
         if start_id_char != expected_id:
-            # This is the "Garbage Packet" filter. 
             # If we wanted 'W' but got 'E', return None so we don't crash.
             return None
 
@@ -268,7 +260,7 @@ def generate_cars_west(pot_value):
     except traci.TraCIException as e:
         print(f"[GEN WEST ERROR] {veh_id}: {e}")
 
-#this works only for traffic light west for now
+
 def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
     """Converts the Hardware Status Dictionary to a SUMO phase string"""
     car_string = status_dict["Car_Lights"]
@@ -278,7 +270,7 @@ def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
         if char == 'G': return 'G'
         if char == 'Y': return 'y'
         if char == 'R': return 'r'
-        return 'N' # Default/N
+        return 'N' # Default/N. N just means the lane is Downstream
 
     phase_chars = []
     
@@ -306,7 +298,7 @@ def main():
     # Open Serial
     try:
         ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1.0)
-        time.sleep(2) # Wait for Arduino reset
+        time.sleep(2) # Small delay to wait for FPGA/Arduino
         print("Serial Port Opened. Starting Simulation...")
     except serial.SerialException as e:
         print(f"Error opening serial port: {e}")
@@ -332,7 +324,7 @@ def main():
                 print(f"\n[Step {step}] TX Traffic Counts WEST (Total {len(TL_WEST_TRAFFIC_VALUES)} lanes):")
                 print(f"    Raw Counts: {TL_WEST_TRAFFIC_VALUES}")
             
-            # 1. FLUSH BUFFER (Fixes sync issues)
+            # Flush Buffer to prevent Syncing issues
             ser.reset_input_buffer()
 
             # Send data to Traffic Control Device
@@ -373,7 +365,7 @@ def main():
                 print(f"\n[Step {step}] TX Traffic Counts EAST (Total {len(TL_EAST_TRAFFIC_VALUES)} lanes):")
                 print(f"    Raw Counts: {TL_EAST_TRAFFIC_VALUES}")
             
-            # 1. FLUSH BUFFER AGAIN
+            # Flush Buffer Again
             ser.reset_input_buffer()
 
             # Send data to Traffic Control Device
@@ -407,7 +399,7 @@ def main():
 
             step += 1
             
-            # Ensure the loop doesn't run faster than 0.3s
+            # Ensure the loop doesn't run faster than 0.3s. This could be finetuned based on taste but i think this is an ok time. It gives time for the UART tranmissions which are sloww!
             if(FREQUENCY_CONTROL):
                 elapsed = time.time() - start_time
                 if elapsed < 0.3:
