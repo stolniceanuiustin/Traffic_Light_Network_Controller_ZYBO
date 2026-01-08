@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-01-08T17:04:31.420916+02:00 by Eclipse SUMO GUI 1.25.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\IntersectieIRE.net.xml"/>
+        <route-files value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\car_routes.rou.xml"/>
+        <additional-files value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\vtypes.xml"/>
+    </input>
+
+    <output>
+        <summary-output value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\summary.xml"/>
+        <tripinfo-output value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\tripinfo.xml"/>
+        <statistic-output value="D:\ProiectSSC\TrafficSimulation_IRE_Botosani\statistics.xml"/>
+    </output>
+
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+    </time>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+        <waiting-time-memory value="1000"/>
+    </processing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</sumoConfiguration>
+-->
+
+<summary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/summary_file.xsd">
+</summary>

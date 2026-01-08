@@ -1,0 +1,98 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0" version="29.2.10">
+  <diagram name="Page-1" id="Fj9xWf5HH6A8BP3o2jpc">
+    <mxGraphModel dx="1148" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-4" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="gt1IKBIHWju1H_WKx3Ug-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-20" connectable="0" parent="gt1IKBIHWju1H_WKx3Ug-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Stare semafor" vertex="1">
+          <mxGeometry relative="1" x="-0.15" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;Controller Trafic (PS pe ZYNQ-7000)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="200" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-5" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="gt1IKBIHWju1H_WKx3Ug-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Hardware Abstraction Layer (PS)" vertex="1">
+          <mxGeometry height="60" width="250" x="185" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-7" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="gt1IKBIHWju1H_WKx3Ug-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-8" connectable="0" parent="gt1IKBIHWju1H_WKx3Ug-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Prin&lt;br&gt;PMOD UART" vertex="1">
+          <mxGeometry relative="1" x="-0.0727" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Modul UART (PL)" vertex="1">
+          <mxGeometry height="50" width="280" x="170" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-10" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="gt1IKBIHWju1H_WKx3Ug-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Port USB(PC)" vertex="1">
+          <mxGeometry height="50" width="210" x="560" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-12" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="gt1IKBIHWju1H_WKx3Ug-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-22" connectable="0" parent="gt1IKBIHWju1H_WKx3Ug-12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Stare Semafor" vertex="1">
+          <mxGeometry relative="1" x="0.0905" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Script Python cu TraCI si PySerial" vertex="1">
+          <mxGeometry height="40" width="210" x="560" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Sumo" vertex="1">
+          <mxGeometry height="50" width="210" x="560" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-13" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.7;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.705;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="721.05" y="210" as="sourcePoint" />
+            <mxPoint x="720" y="269" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-23" connectable="0" parent="gt1IKBIHWju1H_WKx3Ug-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Valori&lt;br&gt;trafic" vertex="1">
+          <mxGeometry relative="1" x="-0.2285" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-14" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=0.705;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="721" y="310" as="sourcePoint" />
+            <mxPoint x="720" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-15" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-6" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" target="gt1IKBIHWju1H_WKx3Ug-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="530" y="310" as="sourcePoint" />
+            <mxPoint x="580" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-16" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.706;entryY=0.998;entryDx=0;entryDy=0;entryPerimeter=0;" target="gt1IKBIHWju1H_WKx3Ug-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="362" y="350" as="sourcePoint" />
+            <mxPoint x="460" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-17" edge="1" parent="1" source="gt1IKBIHWju1H_WKx3Ug-2" style="endArrow=classic;html=1;rounded=0;exitX=0.86;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.908;entryY=1.014;entryDx=0;entryDy=0;entryPerimeter=0;" target="gt1IKBIHWju1H_WKx3Ug-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="410" y="320" as="sourcePoint" />
+            <mxPoint x="460" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt1IKBIHWju1H_WKx3Ug-19" connectable="0" parent="gt1IKBIHWju1H_WKx3Ug-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Valori trafic" vertex="1">
+          <mxGeometry relative="1" x="0.1782" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

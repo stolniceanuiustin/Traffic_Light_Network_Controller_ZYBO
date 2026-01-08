@@ -18,11 +18,11 @@ CONFIG_FILE = "mysim.sumocfg"
 SIM_DURATION = 3600
 TL_ID = "TL_WEST"
 TL_EAST_ID = "TL_EAST"
-DEBUG = True
+DEBUG = False
 FREQUENCY_CONTROL = False
 
 # ==== SERIAL CONFIGURATION ==== 
-SERIAL_PORT = 'COM45' 
+SERIAL_PORT = 'COM22' 
 BAUD_RATE = 9600
 CHUNK_SIZE = 3
 
@@ -286,7 +286,10 @@ def parse_status_to_sumo_phase(status_dict, sumo_to_hw, ped_lane_cnt):
 # ==== MAIN SIMULATION LOOP ==== 
 
 def main():
-    sumo_cmd = [SUMO_BINARY, "-c", CONFIG_FILE]
+    sumo_cmd = [SUMO_BINARY, "-c", CONFIG_FILE, "--statistic-output", "statistics.xml",     
+    "--duration-log.statistics", "true",         
+    "--summary-output", "summary.xml"            
+]
     
     # Start SUMO
     try:

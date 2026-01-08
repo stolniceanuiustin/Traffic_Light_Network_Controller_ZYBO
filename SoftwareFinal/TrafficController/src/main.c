@@ -80,27 +80,27 @@ void loop() {
       // --- WEST LOGIC ---
       parse_traffic_values(&tl_west, traffic_string, traffic_string_idx);
       run_traffic_controller(&tl_west, PEDESTRIAN_LANE_TL_WEST);
-      send_traffic_state(&tl_west, 'W', 2);
+      send_traffic_state(&tl_west, 'W', read_potentiometer());
     } else {
       // --- EAST LOGIC ---
       parse_traffic_values(&tl_east, traffic_string, traffic_string_idx);
       run_traffic_controller(&tl_east, PEDESTRIAN_LANE_TL_EAST);
 
-      send_traffic_state(&tl_east, 'E', 2);
+      send_traffic_state(&tl_east, 'E', read_potentiometer());
     }
 
     traffic_string_idx = 0;
     message_complete = false;
     message_count = (message_count + 1) % 2;
   }
-//   if (ped_btn_is_pressed(TL_EAST)) {
-//     xil_printf("PEDESTRIAN WANTS TO CROSS in EAST!");
-//     signal_pedestrian(&tl_east, PEDESTRIAN_LANE_TL_EAST);
-//   }
-//   if (ped_btn_is_pressed(TL_WEST)) {
-//     xil_printf("PEDESTRIAN WANTS TO CROSS in WEST!");
-//     signal_pedestrian(&tl_west, PEDESTRIAN_LANE_TL_WEST);
-//   }
+  if (ped_btn_is_pressed(TL_EAST)) {
+    xil_printf("PEDESTRIAN WANTS TO CROSS in EAST!");
+    signal_pedestrian(&tl_east, PEDESTRIAN_LANE_TL_EAST);
+  }
+  if (ped_btn_is_pressed(TL_WEST)) {
+    xil_printf("PEDESTRIAN WANTS TO CROSS in WEST!");
+    signal_pedestrian(&tl_west, PEDESTRIAN_LANE_TL_WEST);
+  }
 }
 
 int main() {
